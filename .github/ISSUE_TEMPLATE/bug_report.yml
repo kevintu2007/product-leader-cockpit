@@ -1,0 +1,70 @@
+name: Bug report
+description: Something in Product Mission Control does not work as described.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a bug. Use the sample workspace or other made-up data; do not paste real personal or company data.
+        To report a security vulnerability, do not use this form: follow SECURITY.md instead.
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: One action per line, starting from the screen you were on.
+      placeholder: |
+        1. Open Work Queue
+        2. Select Prepare to accept on …
+        3. …
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected, and what happened instead
+    validations:
+      required: true
+  - type: input
+    id: correlation
+    attributes:
+      label: Correlation ID
+      description: If an error panel was shown, copy its Correlation ID.
+  - type: input
+    id: version
+    attributes:
+      label: App version or commit
+      placeholder: 0.2.0-beta
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+      placeholder: Windows 11 24H2
+    validations:
+      required: true
+  - type: dropdown
+    id: workspace
+    attributes:
+      label: Workspace
+      options:
+        - Sample workspace
+        - My workspace
+    validations:
+      required: true
+  - type: dropdown
+    id: language
+    attributes:
+      label: Interface language
+      options:
+        - English
+        - 繁體中文
+        - 简体中文
+        - 日本語
+        - 한국어
+        - Español
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: Optional. Capture only the Product Mission Control window.

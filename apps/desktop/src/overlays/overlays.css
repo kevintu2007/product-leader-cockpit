@@ -1,0 +1,465 @@
+/* Shared overlay styling (O03-O06). */
+
+.pmc-section-title {
+  margin: 0 0 var(--pmc-space-3);
+  font-size: calc(var(--pmc-type-section-title-size) * var(--pmc-app-scale));
+  line-height: var(--pmc-type-section-title-line);
+  font-weight: var(--pmc-type-section-title-weight);
+}
+
+/* O06 text-scale preview */
+
+.pmc-text-scale-preview {
+  padding: var(--pmc-space-4);
+  border: 1px solid var(--pmc-color-border-subtle);
+  border-radius: var(--pmc-radius-lg);
+  background: var(--pmc-color-surface);
+}
+
+.pmc-text-scale-options {
+  display: flex;
+  gap: var(--pmc-space-2);
+  margin-bottom: var(--pmc-space-4);
+}
+
+.pmc-text-scale-option {
+  min-height: var(--pmc-control-height-compact);
+  min-width: var(--pmc-control-height-compact);
+  padding: 0 var(--pmc-space-3);
+  border: 1px solid var(--pmc-color-border-control);
+  border-radius: var(--pmc-radius-sm);
+  background: var(--pmc-color-surface);
+  color: var(--pmc-color-text);
+  font: inherit;
+  font-variant-numeric: var(--pmc-font-variant-tabular);
+  cursor: pointer;
+}
+
+.pmc-text-scale-option[data-active="true"] {
+  background: var(--pmc-color-primary-fill);
+  border-color: var(--pmc-color-primary-fill);
+  color: var(--pmc-color-on-primary);
+  font-weight: 650;
+}
+
+.pmc-text-scale-option:focus-visible {
+  outline: var(--pmc-focus-width) solid var(--pmc-color-focus);
+  outline-offset: var(--pmc-focus-offset);
+}
+
+.pmc-text-scale-sample {
+  padding: var(--pmc-space-4);
+  border-radius: var(--pmc-radius-md);
+  background: var(--pmc-color-surface-muted);
+}
+
+.pmc-text-scale-sample-body {
+  margin: 0 0 var(--pmc-space-3);
+  font-size: calc(var(--pmc-type-body-size) * var(--pmc-app-scale));
+  line-height: var(--pmc-type-body-line);
+  color: var(--pmc-color-text);
+}
+
+.pmc-text-scale-sample-label {
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  color: var(--pmc-color-text-muted);
+}
+
+/* O05 safe error detail */
+
+.pmc-safe-error {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pmc-space-3);
+  padding: var(--pmc-space-4);
+  border: 1px solid var(--pmc-color-status-danger-border);
+  border-radius: var(--pmc-radius-lg);
+  background: var(--pmc-color-status-danger-bg);
+  color: var(--pmc-color-status-danger-fg);
+}
+
+.pmc-safe-error-message {
+  margin: 0;
+  font-size: calc(var(--pmc-type-body-size) * var(--pmc-app-scale));
+  line-height: var(--pmc-type-body-line);
+}
+
+.pmc-safe-error-correlation {
+  display: flex;
+  align-items: center;
+  gap: var(--pmc-space-2);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  font-variant-numeric: var(--pmc-font-variant-tabular);
+}
+
+.pmc-safe-error-correlation-label {
+  font-weight: 650;
+}
+
+.pmc-safe-error-retry,
+.pmc-safe-error-copy,
+.pmc-safe-error-actions button {
+  min-height: var(--pmc-control-height-compact);
+  padding: 0 var(--pmc-space-3);
+  border: 1px solid var(--pmc-color-border-control);
+  border-radius: var(--pmc-radius-sm);
+  background: var(--pmc-color-surface);
+  color: var(--pmc-color-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.pmc-safe-error-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pmc-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Classification badge */
+
+.pmc-classification-badge {
+  display: inline-block;
+  padding: 2px var(--pmc-space-2);
+  border: 1px solid;
+  border-radius: var(--pmc-radius-sm);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  font-weight: 650;
+}
+
+.pmc-classification-badge[data-classification="public"] {
+  color: var(--pmc-color-classification-public-fg);
+  background: var(--pmc-color-classification-public-bg);
+  border-color: var(--pmc-color-classification-public-border);
+}
+
+.pmc-classification-badge[data-classification="internal"] {
+  color: var(--pmc-color-classification-internal-fg);
+  background: var(--pmc-color-classification-internal-bg);
+  border-color: var(--pmc-color-classification-internal-border);
+}
+
+.pmc-classification-badge[data-classification="confidential"] {
+  color: var(--pmc-color-classification-confidential-fg);
+  background: var(--pmc-color-classification-confidential-bg);
+  border-color: var(--pmc-color-classification-confidential-border);
+}
+
+.pmc-classification-badge[data-classification="restricted"] {
+  color: var(--pmc-color-classification-restricted-fg);
+  background: var(--pmc-color-classification-restricted-bg);
+  border-color: var(--pmc-color-classification-restricted-border);
+}
+
+.pmc-classification-badge[data-classification="unclassified"] {
+  color: var(--pmc-color-classification-unclassified-fg);
+  background: var(--pmc-color-classification-unclassified-bg);
+  border-color: var(--pmc-color-classification-unclassified-border);
+}
+
+/* Focus-trap dialog shell (O03/O04) */
+
+/* The review sheet sits above the page it was opened from, centred, with the
+   page dimmed behind it: the person is deciding one thing, and nothing else
+   on screen should compete. The backdrop holds nothing focusable, so the
+   focus trap is unchanged, and clicking it closes nothing -- a review ends
+   only by a decision. */
+.pmc-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--pmc-z-dialog);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: var(--pmc-color-overlay);
+}
+
+.pmc-h2a-review,
+.pmc-h2b-approval {
+  width: min(680px, 100%);
+  max-height: calc(100vh - 48px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--pmc-space-3);
+  overflow: auto;
+  padding: var(--pmc-space-5) var(--pmc-space-6) 0;
+  border: 1px solid var(--pmc-color-border-subtle);
+  border-radius: var(--pmc-radius-lg);
+  background: var(--pmc-color-surface);
+  color: var(--pmc-color-text);
+  box-shadow: var(--pmc-shadow-dialog);
+}
+
+.pmc-h2a-review > .pmc-classification-badge,
+.pmc-h2b-approval > .pmc-classification-badge {
+  align-self: flex-start;
+}
+
+.pmc-h2a-review > .pmc-section-title,
+.pmc-h2b-approval > .pmc-section-title {
+  margin: 0;
+  font-size: calc(var(--pmc-type-page-title-size) * var(--pmc-app-scale));
+  line-height: var(--pmc-type-page-title-line);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.pmc-h2a-summary {
+  margin: 0;
+  color: var(--pmc-color-text-muted);
+}
+
+.pmc-h2a-fields {
+  display: grid;
+  margin: var(--pmc-space-2) 0 0;
+  border-top: 1px solid var(--pmc-color-border-subtle);
+}
+
+.pmc-h2a-field {
+  display: grid;
+  grid-template-columns: 148px minmax(0, 1fr);
+  gap: var(--pmc-space-4);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--pmc-color-border-subtle);
+}
+
+.pmc-h2a-fields dt {
+  color: var(--pmc-color-text-muted);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  line-height: 1.5;
+}
+
+.pmc-h2a-fields dd {
+  min-width: 0;
+  margin: 0;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  font-variant-numeric: var(--pmc-font-variant-tabular);
+}
+
+/* The decision stays in reach however long the preview is. */
+.pmc-h2a-actions {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pmc-space-3);
+  margin: 0 calc(-1 * var(--pmc-space-6));
+  padding: var(--pmc-space-4) var(--pmc-space-6);
+  border-top: 1px solid var(--pmc-color-border-subtle);
+  background: var(--pmc-color-surface);
+}
+
+.pmc-h2a-prepare-again,
+.pmc-h2a-done {
+  min-height: var(--pmc-control-height-standard);
+  padding: 0 var(--pmc-space-4);
+  border: 1px solid var(--pmc-color-border-control);
+  border-radius: var(--pmc-radius-md);
+  background: var(--pmc-color-surface);
+  color: var(--pmc-color-text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Closing without deciding sits apart from the two decisions, and quieter. */
+.pmc-h2a-dismiss {
+  min-height: var(--pmc-control-height-standard);
+  margin-left: auto;
+  padding: 0 var(--pmc-space-4);
+  border: 0;
+  border-radius: var(--pmc-radius-md);
+  background: transparent;
+  color: var(--pmc-color-text-muted);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pmc-h2a-dismiss:hover:not(:disabled) {
+  background: var(--pmc-color-surface-muted);
+  color: var(--pmc-color-text);
+}
+
+.pmc-h2a-dismiss:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.pmc-h2a-decision-status {
+  margin: 0;
+  color: var(--pmc-color-text-muted);
+}
+
+.pmc-h2a-decision-status:empty {
+  display: none;
+}
+
+.pmc-h2a-approve {
+  min-height: var(--pmc-control-height-standard);
+  padding: 0 var(--pmc-space-4);
+  border: none;
+  border-radius: var(--pmc-radius-md);
+  background: var(--pmc-color-primary-fill);
+  color: var(--pmc-color-on-primary);
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.pmc-h2a-approve:disabled,
+.pmc-h2a-reject:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.pmc-h2a-reject {
+  min-height: var(--pmc-control-height-standard);
+  padding: 0 var(--pmc-space-4);
+  border: 1px solid var(--pmc-color-border-control);
+  border-radius: var(--pmc-radius-md);
+  background: var(--pmc-color-surface);
+  color: var(--pmc-color-text);
+  cursor: pointer;
+}
+
+/* O04 H2b approval additions */
+
+.pmc-h2b-evidence {
+  padding: var(--pmc-space-3);
+  border: 1px solid var(--pmc-color-status-warning-border);
+  border-radius: var(--pmc-radius-md);
+  background: var(--pmc-color-status-warning-bg);
+}
+
+.pmc-h2b-evidence dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--pmc-space-2) var(--pmc-space-4);
+  margin: 0;
+}
+
+.pmc-h2b-evidence dt {
+  color: var(--pmc-color-status-warning-fg);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+}
+
+.pmc-h2b-evidence dd {
+  margin: 0;
+  color: var(--pmc-color-status-warning-fg);
+}
+
+.pmc-h2b-irreversible-statement {
+  margin: var(--pmc-space-3) 0 0;
+  color: var(--pmc-color-status-danger-fg);
+  font-weight: 650;
+}
+
+.pmc-h2b-confirmation-label {
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  font-weight: 650;
+}
+
+.pmc-h2b-confirmation-input {
+  min-height: var(--pmc-control-height-standard);
+  padding: 0 var(--pmc-space-3);
+  border: 1px solid var(--pmc-color-border-control);
+  border-radius: var(--pmc-radius-sm);
+  background: var(--pmc-color-surface);
+  color: var(--pmc-color-text);
+  font: inherit;
+}
+
+.pmc-h2b-confirmation-input:focus-visible {
+  outline: var(--pmc-focus-width) solid var(--pmc-color-focus);
+  outline-offset: var(--pmc-focus-offset);
+}
+
+.pmc-h2a-digest {
+  display: block;
+  word-break: break-all;
+  user-select: all;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.pmc-h2a-support ul {
+  margin: 0.25rem 0 0;
+  padding-left: 1.25rem;
+}
+
+/* In a narrow column (a Work Queue row) the label and the copy button stay
+   whole; the identifier wraps onto its own line instead. */
+.pmc-safe-error-correlation {
+  flex-wrap: wrap;
+}
+
+.pmc-safe-error-correlation-label,
+.pmc-safe-error-copy,
+.pmc-safe-error-retry {
+  white-space: nowrap;
+}
+
+.pmc-safe-error-correlation-value {
+  overflow-wrap: anywhere;
+}
+
+/* The footer carries the outcome row above the buttons. */
+.pmc-h2a-actions {
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.pmc-h2a-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pmc-space-3);
+}
+
+.pmc-h2a-decision-status[data-outcome="approved"] {
+  color: var(--pmc-color-status-success-fg);
+  font-weight: 650;
+}
+
+/* ------------------------------------------ recovery passphrase dialog --- */
+
+.pmc-passphrase-words {
+  margin: 0;
+  padding: var(--pmc-space-4);
+  border: 1px solid var(--pmc-color-border-subtle);
+  border-radius: var(--pmc-radius-sm);
+  background: var(--pmc-color-surface-muted);
+  font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  font-size: calc(1.25rem * var(--pmc-app-scale));
+  line-height: 1.6;
+  word-spacing: 0.3em;
+  user-select: all;
+}
+
+.pmc-passphrase-check {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--pmc-space-2);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+}
+
+.pmc-passphrase-check input {
+  margin-top: 3px;
+}
+
+.pmc-link-button {
+  align-self: flex-start;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--pmc-color-link);
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.pmc-link-button:focus-visible {
+  outline: var(--pmc-focus-width) solid var(--pmc-color-focus);
+  outline-offset: var(--pmc-focus-offset);
+}

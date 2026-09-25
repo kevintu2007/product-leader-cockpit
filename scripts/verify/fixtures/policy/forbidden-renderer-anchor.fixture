@@ -1,0 +1,1 @@
+export const remoteAnchor = '<a href="https://example.invalid">remote</a>';

@@ -1,0 +1,13 @@
+[package]
+name = "pmc-ledger"
+version = "0.2.0-beta"
+edition = "2021"
+rust-version = "1.88"
+
+[dependencies]
+pmc-domain = { path = "../pmc-domain" }
+rusqlite = { version = "=0.40.2", default-features = false, features = ["backup", "bundled"] }
+sha2 = "=0.10.9"
+
+[lib]
+path = "src/lib.rs"

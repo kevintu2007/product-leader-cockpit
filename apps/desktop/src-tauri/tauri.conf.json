@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Product Mission Control",
+  "version": "0.2.0-beta",
+  "identifier": "com.productmissioncontrol.desktop",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://127.0.0.1:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "security": {
+      "csp": "default-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' ipc: http://ipc.localhost"
+    },
+    "windows": [
+      {
+        "title": "Product Mission Control",
+        "width": 1280,
+        "height": 800,
+        "minWidth": 1024,
+        "minHeight": 680,
+        "resizable": true,
+        "additionalBrowserArgs": "--disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection --disable-background-networking --disable-component-update --disable-domain-reliability --disable-quic --disable-sync --dns-over-https-mode=off --metrics-recording-only --no-pings"
+      }
+    ]
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "createUpdaterArtifacts": false,
+    "publisher": "Product Mission Control",
+    "icon": ["icons/icon.ico"],
+    "windows": {
+      "webviewInstallMode": {
+        "type": "offlineInstaller",
+        "silent": true
+      },
+      "nsis": {
+        "template": "nsis/installer.nsi",
+        "installMode": "currentUser",
+        "languages": ["English", "TradChinese", "SimpChinese", "Japanese", "Korean", "Spanish"],
+        "displayLanguageSelector": false
+      }
+    }
+  }
+}

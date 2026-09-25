@@ -1,0 +1,19 @@
+{
+  "bundle": {
+    "active": true,
+    "targets": ["nsis", "msi"],
+    "createUpdaterArtifacts": false,
+    "publisher": "Product Mission Control",
+    "icon": ["icons/icon.ico"],
+    "windows": {
+      "webviewInstallMode": { "type": "downloadBootstrapper", "silent": true },
+      "nsis": {
+        "template": "nsis/installer.nsi",
+        "installMode": "perMachine",
+        "languages": ["English", "TradChinese", "SimpChinese", "Japanese", "Korean", "Spanish"],
+        "displayLanguageSelector": false,
+        "minimumWebview2Version": "110.0.1531.0"
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+export function sendTelemetry(url, payload) {
+  return fetch(url, { method: "POST", body: payload });
+}
+
+export function navigate(url) {
+  window.location.assign(url);
+  window.location.href = url;
+}
+
+export const unsafeMarkup = '<form action="https://example.invalid"><a href="https://example.invalid">';

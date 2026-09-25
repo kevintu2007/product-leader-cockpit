@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you refer to this work, please cite it as below."
+title: "Product Mission Control"
+abstract: "A local-first desktop cockpit for product leaders: it surfaces and ranks what needs attention, prepares every material change as an exact preview, and leaves every decision to a person."
+type: software
+authors:
+  - family-names: "Tu"
+    given-names: "Kevin Yu-chang"
+    alias: "Polatouche.K"
+repository-code: "https://github.com/kevintu2007/product-leader-cockpit"
+license: PolyForm-Noncommercial-1.0.0
+version: "0.2.0-beta"
+keywords:
+  - product management
+  - portfolio management
+  - local-first
+  - human-in-the-loop
+  - tauri
+  - rust

@@ -1,0 +1,41 @@
+[workspace]
+resolver = "2"
+members = [
+  "apps/desktop/src-tauri",
+  "crates/pmc-application",
+  "crates/pmc-domain",
+  "crates/pmc-knowledge",
+  "crates/pmc-ledger",
+  "crates/pmc-platform",
+  "tools/pmc-seed",
+]
+
+[workspace.package]
+version = "0.2.0-beta"
+edition = "2021"
+rust-version = "1.88"
+license = "PolyForm-Noncommercial-1.0.0"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+expect_used = "deny"
+unwrap_used = "deny"
+
+# The bundled SQLite is C code; built unoptimized it made every Ledger test
+# several times slower. Dev and test builds only; release builds are unaffected.
+[profile.dev.package.libsqlite3-sys]
+opt-level = 3
+
+# scrypt, the backup passphrase KDF (ADR 0010: N = 2^18, about 256 MiB),
+# built unoptimized takes tens of seconds per archive in dev builds and tests.
+# Dev and test builds only; release builds are unaffected.
+[profile.dev.package.scrypt]
+opt-level = 3
+
+[profile.dev.package.salsa20]
+opt-level = 3
+
+[profile.dev.package.pbkdf2]
+opt-level = 3

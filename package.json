@@ -1,0 +1,50 @@
+{
+  "name": "product-mission-control",
+  "version": "0.2.0-beta",
+  "private": true,
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "type": "module",
+  "description": "Local-first desktop mission control for a Head of Products",
+  "engines": {
+    "node": ">=24.18.0 <25",
+    "npm": ">=11.16.0 <12"
+  },
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace @pmc/desktop",
+    "dev": "npm run dev --workspace @pmc/desktop",
+    "desktop:dev": "npm run tauri:dev --workspace @pmc/desktop",
+    "desktop:build": "node scripts/build/desktop-build.mjs",
+    "desktop:release": "node scripts/build/desktop-build.mjs --release",
+    "format": "prettier --write package.json tsconfig.base.json vitest.config.ts playwright.config.ts eslint.config.mjs apps scripts/verify",
+    "format:check": "prettier --check package.json tsconfig.base.json vitest.config.ts playwright.config.ts eslint.config.mjs apps scripts/verify",
+    "lint": "eslint . --max-warnings 0",
+    "policy:check": "node scripts/verify/check-policies.mjs",
+    "test": "vitest run --pool=threads --maxWorkers=1",
+    "test:e2e": "playwright test",
+    "typecheck": "tsc --noEmit -p apps/desktop/tsconfig.json --pretty false",
+    "verify": "node scripts/verify/run.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.58.1",
+    "@testing-library/jest-dom": "7.0.1",
+    "@testing-library/react": "16.3.2",
+    "@testing-library/user-event": "14.6.6",
+    "@types/node": "26.2.0",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.4",
+    "@vitejs/plugin-react": "6.0.5",
+    "eslint": "9.39.5",
+    "eslint-plugin-jsx-a11y": "6.10.2",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "eslint-plugin-react-refresh": "0.5.4",
+    "jsdom": "30.0.1",
+    "prettier": "3.9.6",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.67.0",
+    "vite": "8.2.1",
+    "vitest": "4.1.10"
+  }
+}

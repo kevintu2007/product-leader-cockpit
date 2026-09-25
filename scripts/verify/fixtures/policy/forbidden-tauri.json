@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Fixture",
+  "version": "0.1.0",
+  "identifier": "com.example.fixture",
+  "build": {
+    "devUrl": "http://127.0.0.1:1420",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "security": {
+      "csp": "default-src 'self'; connect-src 'self' https://example.invalid"
+    },
+    "windows": [{ "title": "Fixture", "url": "https://example.invalid" }]
+  },
+  "plugins": {
+    "fs": {}
+  }
+}

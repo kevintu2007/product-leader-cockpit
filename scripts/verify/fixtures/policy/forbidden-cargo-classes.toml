@@ -1,0 +1,15 @@
+[package]
+name = "policy-fixture"
+version = "0.1.0"
+
+[dependencies]
+native_fs = "1.0.0"
+native_filesystem = "1.0.0"
+native_shell = "1.0.0"
+native_http = "1.0.0"
+native_https = "1.0.0"
+native_network = "1.0.0"
+native_sql = "1.0.0"
+native_uri = "1.0.0"
+native_opener = "1.0.0"
+native_process = "1.0.0"

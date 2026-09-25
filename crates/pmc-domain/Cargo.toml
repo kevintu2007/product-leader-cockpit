@@ -1,0 +1,11 @@
+[package]
+name = "pmc-domain"
+version = "0.2.0-beta"
+edition = "2021"
+rust-version = "1.88"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+sha2 = "=0.10.9"

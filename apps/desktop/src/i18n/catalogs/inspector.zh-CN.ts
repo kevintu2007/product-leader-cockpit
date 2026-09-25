@@ -1,0 +1,73 @@
+import type { INSPECTOR_EN } from "./inspector.en";
+
+/** O01 Product inspector 的简体中文文字。键与英文完全相同；由 zh-TW 目录转写，采用大陆用语。 */
+export const INSPECTOR_ZH_CN = {
+  "inspector.route": "Product 详情",
+  "inspector.outOfSync":
+    "Product 详情的两份来源读到不同的 Ledger revision，因此没有显示任何内容。 把两个时刻拼成一份 inspector 会让界面看起来正常却是错的。",
+  "inspector.healthEvidence": "Evidence {label} 已关联；验证状态：{verification}。",
+  "inspector.healthRecord": "{kind}「{label}」：{reason}。",
+
+  "inspector.pinConfirm":
+    "要为 {id} 固定指纹吗？系统会读取这份 Evidence 目前所在的文件，把当下的字节摘要记为它的身份。固定是永久的：之后同样的内容是「重新观测」，文件移动是「移动」，内容改变是「取代」，都不会再改写这个指纹。",
+  "inspector.reobserveConfirm":
+    "要重新观测 {id} 吗？系统会依这份 Evidence 目前记录的位置读取文件，只有在观测结果与已存的状态不同时才会写入。",
+  "inspector.confirmPin": "确认固定",
+  "inspector.confirmReobserve": "确认重新观测",
+  "inspector.cancel": "取消",
+  "inspector.sending": "提交中…",
+  "inspector.written": "已写入：验证状态现在是{verification}。",
+  "inspector.unchanged": "没有变化：观测结果与已存的状态相同，Ledger 未被写入。",
+  "inspector.close": "关闭",
+  "inspector.pinFailed": "固定未完成。 {message}",
+  "inspector.reobserveFailed": "重新观测未完成。 {message}",
+  "inspector.abandon": "放弃这个动作",
+  "inspector.pin": "固定指纹",
+  "inspector.reobserve": "重新观测",
+
+  "inspector.link": "关联 Evidence 到此 Product",
+  "inspector.linkLoading": "正在读取 Evidence…",
+  "inspector.linkChoose": "要关联到 {product} 的 Evidence",
+  "inspector.linkNone": "（没有尚未关联的 Evidence）",
+  "inspector.linkCandidate": "{id}（{verification}、{classification}、版本 {version}）",
+  "inspector.linkConfirm": "确认关联",
+  "inspector.linked": "已关联 {id}；关联时分级 {classification}。",
+  "inspector.linkFailed": "关联未完成。 {message}",
+
+  "inspector.classification": "分级",
+  "inspector.version": "版本",
+  "inspector.fold": "此 inspector 以 {classification} 呈现，因为它显示的 {kind} {id} 是这个分级。",
+  "inspector.happened": "发生",
+  "inspector.nothingHappened": "目前没有任何需要注意的状况。",
+  "inspector.conditionLine": "{condition}{provenance}",
+  "inspector.provenance": "来源：{owner} {id}，版本 {version}",
+  "inspector.impact": "影响",
+  "inspector.impactUnassessed": "尚未有人评估",
+  "inspector.tabs": "Product 详情",
+  "inspector.tab.structure": "结构",
+  "inspector.tab.evidence": "Evidence",
+  "inspector.tab.people": "人员",
+  "inspector.structureNone": "Ledger 中没有任何与此 Product 相关的结构。",
+  "inspector.structureEntry": "{kind}：{label}（{classification}）",
+  "inspector.structureEntryVia": "{kind}：{label}（{classification}），{via}",
+  "inspector.via": "通过 {project}",
+  "inspector.vaultNotConfigured":
+    "此工作区没有可用的 Product Vault（尚未设置）。读取文件的动作——固定指纹、重新观测——目前无法使用；关联 Evidence 不受影响。",
+  "inspector.vaultUnavailable":
+    "Product Vault 目前无法读取（目录不存在、不是目录，或是链接）。读取文件的动作——固定指纹、重新观测——暂时停用；关联 Evidence 不受影响。",
+  "inspector.evidenceNone": "没有任何 Evidence 直接关联到此 Product。",
+  "inspector.evidenceLine": "{id}：{verification}{classifications}",
+  "inspector.evidenceLineUnpinned": "{id}：{verification}{unpinned}{classifications}",
+  "inspector.unpinned": "（未固定指纹）",
+  "inspector.evidenceClassifications": "（Evidence 分级 {classification}；关联时分级 {atLink}）",
+  "inspector.peopleNone": "Ledger 中没有任何人对此 Product 负责或依赖它。",
+  "inspector.person.one": "{name}（{purpose}，另负责 {count} 个 Product）",
+  "inspector.person.other": "{name}（{purpose}，另负责 {count} 个 Product）",
+  "inspector.purpose.responsibility": "负责",
+  "inspector.purpose.dependency": "依赖",
+  "inspector.carriedHeading": "此人目前持有（通过问责，非此 Product 所有）",
+  "inspector.carriedNone": "目前没有持有任何工作事项。",
+  "inspector.carriedLine": "{kind} {label}（{state}）{attention}{intents}",
+  "inspector.nextSteps": "生命周期允许的下一步：{intents}",
+  "inspector.noNextSteps": "无",
+} as const satisfies Record<keyof typeof INSPECTOR_EN, string>;

@@ -1,0 +1,300 @@
+/*
+ * Product Mission Control design tokens.
+ * Source of truth: docs/design/ui-ux-design-system-v0.1.md ("Color and
+ * semantic tokens", "Typography", "Spacing, radius, elevation, and
+ * borders", "Motion and reduced motion"). Values are copied verbatim from
+ * that accepted contract; do not hand-tune a value here without updating
+ * the source document first.
+ *
+ * Theme resolution order (an explicit user choice always wins over the OS):
+ *   1. :root                                   -- light theme (default)
+ *   2. @media (prefers-color-scheme: dark)      -- OS dark, when no
+ *      guarded by :root:not([data-theme="light"])  explicit override exists
+ *   3. :root[data-theme="dark"]                 -- explicit dark override
+ * Settings (S10) is not part of the app shell; this structure exists so a
+ * future theme toggle only needs to stamp `data-theme` on the root element.
+ */
+
+:root {
+  /* Surface */
+  --pmc-color-bg: #f5f5f7;
+  --pmc-color-surface: #ffffff;
+  --pmc-color-surface-muted: #f0f0f2;
+  --pmc-color-surface-selected: #e8f2fc;
+  --pmc-color-overlay: rgba(0, 0, 0, 0.36);
+
+  /* Text and action */
+  --pmc-color-text: #1d1d1f;
+  --pmc-color-text-muted: #6e6e73;
+  --pmc-color-text-disabled: #8e8e93;
+  --pmc-color-link: #0066cc;
+  --pmc-color-primary-fill: #0066cc;
+  --pmc-color-on-primary: #ffffff;
+  --pmc-color-primary-boundary: transparent;
+  --pmc-color-primary-hover: #005cb8;
+  --pmc-color-primary-pressed: #004f9e;
+  --pmc-color-focus: #005fcc;
+
+  /* Borders */
+  --pmc-color-border-subtle: #d2d2d7;
+  --pmc-color-border-control: #86868b;
+
+  /* Status */
+  --pmc-color-status-success-fg: #176b3a;
+  --pmc-color-status-success-bg: #e8f5ec;
+  --pmc-color-status-success-border: #176b3a;
+  --pmc-color-status-warning-fg: #6f4b00;
+  --pmc-color-status-warning-bg: #fff3d6;
+  --pmc-color-status-warning-border: #6f4b00;
+  --pmc-color-status-danger-fg: #a9231d;
+  --pmc-color-status-danger-bg: #fdecea;
+  --pmc-color-status-danger-border: #a9231d;
+  --pmc-color-status-info-fg: #245b88;
+  --pmc-color-status-info-bg: #eaf3fa;
+  --pmc-color-status-info-border: #245b88;
+
+  /* Data classification */
+  --pmc-color-classification-public-fg: #176b3a;
+  --pmc-color-classification-public-bg: #e8f5ec;
+  --pmc-color-classification-public-border: #176b3a;
+  --pmc-color-classification-internal-fg: #245b88;
+  --pmc-color-classification-internal-bg: #eaf3fa;
+  --pmc-color-classification-internal-border: #245b88;
+  --pmc-color-classification-confidential-fg: #6f4b00;
+  --pmc-color-classification-confidential-bg: #fff3d6;
+  --pmc-color-classification-confidential-border: #6f4b00;
+  --pmc-color-classification-restricted-fg: #a9231d;
+  --pmc-color-classification-restricted-bg: #fdecea;
+  --pmc-color-classification-restricted-border: #a9231d;
+  --pmc-color-classification-unclassified-fg: #4a4a4f;
+  --pmc-color-classification-unclassified-bg: #efeff1;
+  --pmc-color-classification-unclassified-border: #4a4a4f;
+
+  /* Charts */
+  --pmc-color-chart-1: #0066cc;
+  --pmc-color-chart-2: #8a4f9e;
+  --pmc-color-chart-3: #247a4b;
+  --pmc-color-chart-4: #9a5a00;
+  --pmc-color-chart-5: #b23a48;
+  --pmc-color-chart-6: #2a7f8e;
+  --pmc-color-chart-7: #6a5cbb;
+  --pmc-color-chart-8: #7a6a24;
+  --pmc-color-chart-grid: #d2d2d7;
+  --pmc-color-chart-axis: #6e6e73;
+  --pmc-color-chart-reference: #1d1d1f;
+
+  /* Typography */
+  /* The Windows UI face. Chinese, Japanese and Korean each take their own
+     Windows UI face (below), so kanji and Simplified hanzi are never drawn
+     with Traditional Chinese glyph shapes. */
+  --pmc-font-family-ui: "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+  --pmc-font-variant-tabular: tabular-nums;
+  --pmc-type-display-size: 28px;
+  --pmc-type-display-line: 34px;
+  --pmc-type-display-weight: 650;
+  --pmc-type-page-title-size: 22px;
+  --pmc-type-page-title-line: 28px;
+  --pmc-type-page-title-weight: 650;
+  --pmc-type-section-title-size: 17px;
+  --pmc-type-section-title-line: 24px;
+  --pmc-type-section-title-weight: 600;
+  --pmc-type-body-size: 14px;
+  --pmc-type-body-line: 21px;
+  --pmc-type-body-weight: 400;
+  --pmc-type-supporting-size: 12px;
+  --pmc-type-supporting-line: 18px;
+  --pmc-type-supporting-weight: 400;
+  --pmc-type-table-size: 13px;
+  --pmc-type-table-line: 18px;
+  --pmc-type-table-weight: 400;
+
+  /* Spacing, radius, control geometry */
+  --pmc-space-1: 4px;
+  --pmc-space-2: 8px;
+  --pmc-space-3: 12px;
+  --pmc-space-4: 16px;
+  --pmc-space-5: 24px;
+  --pmc-space-6: 32px;
+  --pmc-space-7: 48px;
+  --pmc-radius-sm: 6px;
+  --pmc-radius-md: 10px;
+  --pmc-radius-lg: 14px;
+  --pmc-control-height-compact: 32px;
+  --pmc-control-height-standard: 40px;
+  --pmc-icon-size-sm: 16px;
+  --pmc-icon-size-md: 20px;
+  --pmc-focus-width: 2px;
+  --pmc-focus-offset: 2px;
+  --pmc-shadow-floating: 0 8px 24px rgba(0, 0, 0, 0.14);
+  --pmc-shadow-dialog: 0 18px 48px rgba(0, 0, 0, 0.22);
+  --pmc-z-base: 0;
+  --pmc-z-sticky: 100;
+  --pmc-z-popover: 300;
+  --pmc-z-dialog: 500;
+
+  /* Motion */
+  --pmc-motion-fast: 120ms;
+  --pmc-motion-standard: 180ms;
+  --pmc-motion-slow: 240ms;
+  --pmc-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+
+  /* App text scale (O06): five semantic steps, independent of Windows DPI.
+     Components multiply their rem-based sizes by this factor; it is not a
+     token from the design system table but the mechanism O06 previews. */
+  --pmc-app-scale: 1;
+}
+
+/* Latin text stays in Segoe UI; the language's own face draws the rest. */
+:root:lang(zh-TW),
+:root:lang(zh-Hant) {
+  --pmc-font-family-ui: "Segoe UI", "Microsoft JhengHei UI", "Microsoft JhengHei", sans-serif;
+}
+
+:root:lang(zh-CN),
+:root:lang(zh-Hans) {
+  --pmc-font-family-ui: "Segoe UI", "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
+}
+
+:root:lang(ja) {
+  --pmc-font-family-ui: "Segoe UI", "Yu Gothic UI", "Meiryo UI", "Meiryo", sans-serif;
+}
+
+:root:lang(ko) {
+  --pmc-font-family-ui: "Segoe UI", "Malgun Gothic", sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --pmc-color-bg: #0e0e10;
+    --pmc-color-surface: #1c1c1e;
+    --pmc-color-surface-muted: #28282b;
+    --pmc-color-surface-selected: #173a5e;
+    --pmc-color-overlay: rgba(0, 0, 0, 0.6);
+
+    --pmc-color-text: #f5f5f7;
+    --pmc-color-text-muted: #aeaeb2;
+    --pmc-color-text-disabled: #8e8e93;
+    --pmc-color-link: #64b5ff;
+    --pmc-color-primary-fill: #0066cc;
+    --pmc-color-on-primary: #ffffff;
+    --pmc-color-primary-boundary: #f5f5f7;
+    --pmc-color-primary-hover: #1073c7;
+    --pmc-color-primary-pressed: #005cb8;
+    --pmc-color-focus: #64b5ff;
+
+    --pmc-color-border-subtle: #3a3a3c;
+    --pmc-color-border-control: #848489;
+
+    --pmc-color-status-success-fg: #7ddda6;
+    --pmc-color-status-success-bg: #173a29;
+    --pmc-color-status-success-border: #7ddda6;
+    --pmc-color-status-warning-fg: #ffd27a;
+    --pmc-color-status-warning-bg: #493500;
+    --pmc-color-status-warning-border: #ffd27a;
+    --pmc-color-status-danger-fg: #ff9b95;
+    --pmc-color-status-danger-bg: #4a211f;
+    --pmc-color-status-danger-border: #ff9b95;
+    --pmc-color-status-info-fg: #9dccf2;
+    --pmc-color-status-info-bg: #19364d;
+    --pmc-color-status-info-border: #9dccf2;
+
+    --pmc-color-classification-public-fg: #7ddda6;
+    --pmc-color-classification-public-bg: #173a29;
+    --pmc-color-classification-public-border: #7ddda6;
+    --pmc-color-classification-internal-fg: #9dccf2;
+    --pmc-color-classification-internal-bg: #19364d;
+    --pmc-color-classification-internal-border: #9dccf2;
+    --pmc-color-classification-confidential-fg: #ffd27a;
+    --pmc-color-classification-confidential-bg: #493500;
+    --pmc-color-classification-confidential-border: #ffd27a;
+    --pmc-color-classification-restricted-fg: #ff9b95;
+    --pmc-color-classification-restricted-bg: #4a211f;
+    --pmc-color-classification-restricted-border: #ff9b95;
+    --pmc-color-classification-unclassified-fg: #d1d1d6;
+    --pmc-color-classification-unclassified-bg: #323235;
+    --pmc-color-classification-unclassified-border: #d1d1d6;
+
+    --pmc-color-chart-1: #64b5ff;
+    --pmc-color-chart-2: #d5a6e6;
+    --pmc-color-chart-3: #7ddda6;
+    --pmc-color-chart-4: #ffd27a;
+    --pmc-color-chart-5: #ff9b95;
+    --pmc-color-chart-6: #72d7e2;
+    --pmc-color-chart-7: #bdb2ff;
+    --pmc-color-chart-8: #d7cc70;
+    --pmc-color-chart-grid: #3a3a3c;
+    --pmc-color-chart-axis: #aeaeb2;
+    --pmc-color-chart-reference: #f5f5f7;
+  }
+}
+
+:root[data-theme="dark"] {
+  --pmc-color-bg: #0e0e10;
+  --pmc-color-surface: #1c1c1e;
+  --pmc-color-surface-muted: #28282b;
+  --pmc-color-surface-selected: #173a5e;
+  --pmc-color-overlay: rgba(0, 0, 0, 0.6);
+
+  --pmc-color-text: #f5f5f7;
+  --pmc-color-text-muted: #aeaeb2;
+  --pmc-color-text-disabled: #8e8e93;
+  --pmc-color-link: #64b5ff;
+  --pmc-color-primary-fill: #0066cc;
+  --pmc-color-on-primary: #ffffff;
+  --pmc-color-primary-boundary: #f5f5f7;
+  --pmc-color-primary-hover: #1073c7;
+  --pmc-color-primary-pressed: #005cb8;
+  --pmc-color-focus: #64b5ff;
+
+  --pmc-color-border-subtle: #3a3a3c;
+  --pmc-color-border-control: #848489;
+
+  --pmc-color-status-success-fg: #7ddda6;
+  --pmc-color-status-success-bg: #173a29;
+  --pmc-color-status-success-border: #7ddda6;
+  --pmc-color-status-warning-fg: #ffd27a;
+  --pmc-color-status-warning-bg: #493500;
+  --pmc-color-status-warning-border: #ffd27a;
+  --pmc-color-status-danger-fg: #ff9b95;
+  --pmc-color-status-danger-bg: #4a211f;
+  --pmc-color-status-danger-border: #ff9b95;
+  --pmc-color-status-info-fg: #9dccf2;
+  --pmc-color-status-info-bg: #19364d;
+  --pmc-color-status-info-border: #9dccf2;
+
+  --pmc-color-classification-public-fg: #7ddda6;
+  --pmc-color-classification-public-bg: #173a29;
+  --pmc-color-classification-public-border: #7ddda6;
+  --pmc-color-classification-internal-fg: #9dccf2;
+  --pmc-color-classification-internal-bg: #19364d;
+  --pmc-color-classification-internal-border: #9dccf2;
+  --pmc-color-classification-confidential-fg: #ffd27a;
+  --pmc-color-classification-confidential-bg: #493500;
+  --pmc-color-classification-confidential-border: #ffd27a;
+  --pmc-color-classification-restricted-fg: #ff9b95;
+  --pmc-color-classification-restricted-bg: #4a211f;
+  --pmc-color-classification-restricted-border: #ff9b95;
+  --pmc-color-classification-unclassified-fg: #d1d1d6;
+  --pmc-color-classification-unclassified-bg: #323235;
+  --pmc-color-classification-unclassified-border: #d1d1d6;
+
+  --pmc-color-chart-1: #64b5ff;
+  --pmc-color-chart-2: #d5a6e6;
+  --pmc-color-chart-3: #7ddda6;
+  --pmc-color-chart-4: #ffd27a;
+  --pmc-color-chart-5: #ff9b95;
+  --pmc-color-chart-6: #72d7e2;
+  --pmc-color-chart-7: #bdb2ff;
+  --pmc-color-chart-8: #d7cc70;
+  --pmc-color-chart-grid: #3a3a3c;
+  --pmc-color-chart-axis: #aeaeb2;
+  --pmc-color-chart-reference: #f5f5f7;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --pmc-motion-fast: 0ms;
+    --pmc-motion-standard: 0ms;
+    --pmc-motion-slow: 0ms;
+  }
+}

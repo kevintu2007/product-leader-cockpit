@@ -1,0 +1,73 @@
+import type { INSPECTOR_EN } from "./inspector.en";
+
+/** O01 Product inspector 的繁體中文文字。鍵與英文完全相同；用字沿用原本畫面上的文字。 */
+export const INSPECTOR_ZH_TW = {
+  "inspector.route": "Product 詳情",
+  "inspector.outOfSync":
+    "Product 詳情的兩份來源讀到不同的 Ledger revision，因此沒有顯示任何內容。 把兩個時刻拼成一份 inspector 會讓畫面看起來正常卻是錯的。",
+  "inspector.healthEvidence": "Evidence {label} 已連結；驗證狀態：{verification}。",
+  "inspector.healthRecord": "{kind}「{label}」：{reason}。",
+
+  "inspector.pinConfirm":
+    "要為 {id} 釘選指紋嗎？系統會讀取這份 Evidence 目前所在的檔案，把當下的位元組摘要記為它的身分。釘選是永久的：之後同樣的內容是「重新觀察」，檔案移動是「搬移」，內容改變是「取代」，都不會再改寫這個指紋。",
+  "inspector.reobserveConfirm":
+    "要重新觀察 {id} 嗎？系統會依這份 Evidence 目前記錄的位置讀取檔案，只有在觀察結果與已存的狀態不同時才會寫入。",
+  "inspector.confirmPin": "確認釘選",
+  "inspector.confirmReobserve": "確認重新觀察",
+  "inspector.cancel": "取消",
+  "inspector.sending": "送出中…",
+  "inspector.written": "已寫入：驗證狀態現在是{verification}。",
+  "inspector.unchanged": "沒有變化：觀察結果與已存的狀態相同，Ledger 未被寫入。",
+  "inspector.close": "關閉",
+  "inspector.pinFailed": "釘選未完成。 {message}",
+  "inspector.reobserveFailed": "重新觀察未完成。 {message}",
+  "inspector.abandon": "放棄這個動作",
+  "inspector.pin": "釘選指紋",
+  "inspector.reobserve": "重新觀察",
+
+  "inspector.link": "連結 Evidence 到此 Product",
+  "inspector.linkLoading": "正在讀取 Evidence…",
+  "inspector.linkChoose": "要連結到 {product} 的 Evidence",
+  "inspector.linkNone": "（沒有尚未連結的 Evidence）",
+  "inspector.linkCandidate": "{id}（{verification}、{classification}、版本 {version}）",
+  "inspector.linkConfirm": "確認連結",
+  "inspector.linked": "已連結 {id}；連結時分級 {classification}。",
+  "inspector.linkFailed": "連結未完成。 {message}",
+
+  "inspector.classification": "分級",
+  "inspector.version": "版本",
+  "inspector.fold": "此 inspector 以 {classification} 呈現，因為它顯示的 {kind} {id} 是這個分級。",
+  "inspector.happened": "發生",
+  "inspector.nothingHappened": "目前沒有任何需要注意的狀況。",
+  "inspector.conditionLine": "{condition}{provenance}",
+  "inspector.provenance": "來源：{owner} {id}，版本 {version}",
+  "inspector.impact": "影響",
+  "inspector.impactUnassessed": "尚未有人評估",
+  "inspector.tabs": "Product 詳情",
+  "inspector.tab.structure": "結構",
+  "inspector.tab.evidence": "Evidence",
+  "inspector.tab.people": "人員",
+  "inspector.structureNone": "Ledger 中沒有任何與此 Product 相關的結構。",
+  "inspector.structureEntry": "{kind}：{label}（{classification}）",
+  "inspector.structureEntryVia": "{kind}：{label}（{classification}），{via}",
+  "inspector.via": "經由 {project}",
+  "inspector.vaultNotConfigured":
+    "此工作區沒有可用的 Product Vault（尚未設定）。讀取檔案的動作——釘選指紋、重新觀察——目前無法使用；連結 Evidence 不受影響。",
+  "inspector.vaultUnavailable":
+    "Product Vault 目前無法讀取（目錄不存在、不是目錄，或是連結）。讀取檔案的動作——釘選指紋、重新觀察——暫時停用；連結 Evidence 不受影響。",
+  "inspector.evidenceNone": "沒有任何 Evidence 直接連結到此 Product。",
+  "inspector.evidenceLine": "{id}：{verification}{classifications}",
+  "inspector.evidenceLineUnpinned": "{id}：{verification}{unpinned}{classifications}",
+  "inspector.unpinned": "（未釘選指紋）",
+  "inspector.evidenceClassifications": "（Evidence 分級 {classification}；連結時分級 {atLink}）",
+  "inspector.peopleNone": "Ledger 中沒有任何人對此 Product 負責或依賴它。",
+  "inspector.person.one": "{name}（{purpose}，另負責 {count} 個 Product）",
+  "inspector.person.other": "{name}（{purpose}，另負責 {count} 個 Product）",
+  "inspector.purpose.responsibility": "負責",
+  "inspector.purpose.dependency": "依賴",
+  "inspector.carriedHeading": "此人目前持有（經由問責，非此 Product 所有）",
+  "inspector.carriedNone": "目前沒有持有任何工作項目。",
+  "inspector.carriedLine": "{kind} {label}（{state}）{attention}{intents}",
+  "inspector.nextSteps": "生命週期允許的下一步：{intents}",
+  "inspector.noNextSteps": "無",
+} as const satisfies Record<keyof typeof INSPECTOR_EN, string>;

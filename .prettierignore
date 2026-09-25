@@ -1,0 +1,5 @@
+Cargo.lock
+package-lock.json
+apps/desktop/src-tauri/gen/**
+docs/evidence/**
+target

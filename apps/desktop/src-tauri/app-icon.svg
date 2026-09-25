@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Product Mission Control">
+  <rect width="512" height="512" rx="112" fill="#18352c" />
+  <circle cx="256" cy="256" r="152" fill="none" stroke="#75d2ae" stroke-width="32" />
+  <path d="M160 300V212l96-56 96 56v88l-96 56z" fill="#f4f7f5" />
+  <circle cx="256" cy="256" r="38" fill="#25775d" />
+</svg>

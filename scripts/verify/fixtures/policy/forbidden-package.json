@@ -1,0 +1,6 @@
+{
+  "name": "policy-fixture",
+  "dependencies": {
+    "@tauri-apps/plugin-fs": "2.0.0"
+  }
+}

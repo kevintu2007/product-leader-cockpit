@@ -1,0 +1,18 @@
+/* Minimal global reset. Component-level styling lives beside its
+   component (see src/shell/shell.css); this file stays a reset only. */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  /* The shell paints the same tokens and covers the viewport, but the body
+     is painted first. Without this the window flashes light before the
+     shell renders in dark mode. */
+  background: var(--pmc-color-bg);
+  color: var(--pmc-color-text);
+  min-width: 320px;
+  min-height: 100vh;
+  font-synthesis: none;
+}

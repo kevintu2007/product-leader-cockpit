@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/kevintu2007/product-leader-cockpit/security/advisories/new
+    about: Report vulnerabilities privately, never in a public issue.
+  - name: User guide
+    url: https://github.com/kevintu2007/product-leader-cockpit/blob/main/docs/user-guide/walkthrough.md
+    about: Installing, the sample workspace, and setting up your own workspace.

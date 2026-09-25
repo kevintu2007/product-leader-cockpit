@@ -1,0 +1,15 @@
+{
+  "name": "policy-fixture",
+  "dependencies": {
+    "native-fs": "1.0.0",
+    "native-filesystem": "1.0.0",
+    "native-shell": "1.0.0",
+    "native-http": "1.0.0",
+    "native-https": "1.0.0",
+    "native-network": "1.0.0",
+    "native-sql": "1.0.0",
+    "native-uri": "1.0.0",
+    "native-opener": "1.0.0",
+    "native-process": "1.0.0"
+  }
+}

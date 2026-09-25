@@ -1,0 +1,28 @@
+{
+  "constants": {
+    "logEventTypes": {
+      "DOH_URL_REQUEST": 1,
+      "REQUEST_ALIVE": 2,
+      "HTTP_STREAM_REQUEST_BOUND_TO_JOB": 3,
+      "SOCKET_POOL_BOUND_TO_SOCKET": 4,
+      "TCP_CONNECT": 5,
+      "GENERIC_SHARED_DEPENDENCY": 6
+    }
+  },
+  "events": [
+    { "type": 1, "source": { "id": 1 }, "params": {} },
+    {
+      "type": 2,
+      "source": { "id": 1 },
+      "params": { "url": "https://chrome.cloudflare-dns.com/dns-query" }
+    },
+    { "type": 3, "source": { "id": 1 }, "params": { "source_dependency": { "id": 10 } } },
+    { "type": 4, "source": { "id": 10 }, "params": { "source_dependency": { "id": 20 } } },
+    { "type": 5, "source": { "id": 20 }, "params": { "remote_address": "192.0.2.20:443" } },
+    { "type": 2, "source": { "id": 2 }, "params": { "url": "http://tauri.localhost/" } },
+    { "type": 3, "source": { "id": 2 }, "params": { "source_dependency": { "id": 11 } } },
+    { "type": 6, "source": { "id": 11 }, "params": { "source_dependency": { "id": 10 } } },
+    { "type": 4, "source": { "id": 11 }, "params": { "source_dependency": { "id": 21 } } },
+    { "type": 5, "source": { "id": 21 }, "params": { "remote_address": "192.0.2.21:443" } }
+  ]
+}

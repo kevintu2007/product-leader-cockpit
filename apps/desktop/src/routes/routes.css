@@ -1,0 +1,1819 @@
+/* Route surfaces -- Executive Calm, from the accepted DG1 interactive
+   prototype (the DG1 design prototype stylesheet): quiet
+   borders, one dominant task per region, colour that reinforces meaning and
+   never carries it alone. Tokens only. */
+
+/* ----------------------------------------------------------- page head --- */
+
+.pmc-page-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--pmc-space-5);
+  margin-bottom: 22px;
+}
+
+/* A ledger stamp: labelled facts set apart by space, never strung together
+   with separator dots. The label says what the number is; the number keeps
+   tabular figures so successive reads line up. */
+.pmc-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  margin: 0;
+}
+
+.pmc-meta > div {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.pmc-meta dt {
+  color: var(--pmc-color-text-muted);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+}
+
+.pmc-meta dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.pmc-page-headline {
+  margin: 0;
+  font-size: calc(var(--pmc-type-display-size) * var(--pmc-app-scale));
+  line-height: 1.21;
+  font-weight: 650;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.pmc-page-lede {
+  max-width: 720px;
+  margin: 7px 0 0;
+  color: var(--pmc-color-text-muted);
+  line-height: 1.5;
+}
+
+/* The stamp gives way before the title does: it shrinks and its pairs wrap,
+   rather than forcing the head to scroll sideways at a narrow width or a
+   large text scale. */
+.pmc-page-asof {
+  flex: 0 1 auto;
+  min-width: 0;
+  justify-content: flex-end;
+  margin: 0;
+  color: var(--pmc-color-text-muted);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------------------------------------------- controls --- */
+
+.pmc-button,
+.pmc-work-queue-actions > button,
+.pmc-work-queue-rationale button,
+.pmc-work-queue-status > button {
+  min-height: var(--pmc-control-height-compact);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 12px;
+  border: 1px solid var(--pmc-color-border-subtle);
+  border-radius: 8px;
+  background: var(--pmc-color-surface);
+  color: var(--pmc-color-text);
+  font: inherit;
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background var(--pmc-motion-fast) var(--pmc-ease-standard),
+    transform var(--pmc-motion-fast) var(--pmc-ease-standard);
+}
+
+.pmc-button:hover:not(:disabled),
+.pmc-work-queue-actions > button:hover:not(:disabled),
+.pmc-work-queue-rationale button:hover:not(:disabled),
+.pmc-work-queue-status > button:hover:not(:disabled) {
+  background: var(--pmc-color-surface-muted);
+}
+
+.pmc-button:active:not(:disabled),
+.pmc-work-queue-actions > button:active:not(:disabled) {
+  transform: scale(0.985);
+}
+
+.pmc-button:disabled,
+.pmc-work-queue-actions > button:disabled,
+.pmc-work-queue-rationale button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.pmc-button-primary,
+.pmc-work-queue-actions > .pmc-button-primary,
+.pmc-work-queue-rationale button[type="submit"] {
+  border-color: var(--pmc-color-primary-fill);
+  background: var(--pmc-color-primary-fill);
+  color: var(--pmc-color-on-primary);
+}
+
+.pmc-button-primary:hover:not(:disabled),
+.pmc-work-queue-rationale button[type="submit"]:hover:not(:disabled) {
+  background: var(--pmc-color-primary-hover);
+}
+
+/* Chips: a checkbox the person can see the state of without the box. The
+   input stays in place for keyboard and assistive technology. */
+.pmc-chip {
+  position: relative;
+  min-height: var(--pmc-control-height-compact);
+  display: inline-flex;
+  align-items: center;
+  padding: 0 12px;
+  border: 1px solid var(--pmc-color-border-subtle);
+  border-radius: 8px;
+  background: var(--pmc-color-surface);
+  color: var(--pmc-color-text);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  user-select: none;
+}
+
+.pmc-chip:hover {
+  background: var(--pmc-color-surface-muted);
+}
+
+.pmc-chip input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.pmc-chip:has(input:focus-visible) {
+  outline: var(--pmc-focus-width) solid var(--pmc-color-focus);
+  outline-offset: var(--pmc-focus-offset);
+}
+
+.pmc-chip[data-checked="true"] {
+  border-color: var(--pmc-color-text);
+  background: var(--pmc-color-text);
+  color: var(--pmc-color-surface);
+  font-weight: 650;
+}
+
+.pmc-chip-flag {
+  margin-left: var(--pmc-space-2);
+}
+
+.pmc-empty {
+  padding: var(--pmc-space-5);
+  border: 1px dashed var(--pmc-color-border-subtle);
+  border-radius: var(--pmc-radius-lg);
+  background: var(--pmc-color-surface);
+  color: var(--pmc-color-text-muted);
+}
+
+/* ----------------------------------------------------------- work queue --- */
+
+.pmc-work-queue-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pmc-space-2);
+  margin: 0 0 var(--pmc-space-4);
+  padding: 0;
+  border: 0;
+}
+
+.pmc-work-queue-filters legend {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.pmc-work-queue-notice {
+  margin: 0 0 var(--pmc-space-4);
+  padding: 10px 14px;
+  border: 1px solid var(--pmc-color-status-info-border);
+  border-radius: var(--pmc-radius-md);
+  background: var(--pmc-color-status-info-bg);
+  color: var(--pmc-color-status-info-fg);
+}
+
+.pmc-work-queue-table {
+  width: 100%;
+  border: 1px solid var(--pmc-color-border-subtle);
+  border-radius: var(--pmc-radius-lg);
+  border-spacing: 0;
+  background: var(--pmc-color-surface);
+}
+
+.pmc-work-queue-table caption {
+  padding: 0 2px var(--pmc-space-2);
+  color: var(--pmc-color-text-muted);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  text-align: left;
+}
+
+.pmc-work-queue-table thead th {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--pmc-color-border-subtle);
+  color: var(--pmc-color-text-muted);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  font-weight: 650;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.pmc-work-queue-table tbody th,
+.pmc-work-queue-table tbody td {
+  padding: 14px 16px;
+  border-top: 1px solid var(--pmc-color-border-subtle);
+  font-weight: 400;
+  text-align: left;
+  vertical-align: top;
+}
+
+.pmc-work-queue-table tbody tr:first-child th,
+.pmc-work-queue-table tbody tr:first-child td {
+  border-top: 0;
+}
+
+/* A flagged row carries a left rule as well as its reasons in words. */
+.pmc-work-queue-table tbody tr[data-flagged="true"] td:first-child {
+  box-shadow: inset 3px 0 0 var(--pmc-color-status-danger-border);
+}
+
+.pmc-kind {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 9px;
+  border-radius: 8px;
+  background: var(--pmc-color-surface-muted);
+  color: var(--pmc-color-text);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.pmc-work-item-title {
+  display: block;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+/* The title opens the item's detail. It reads as the title first and shows
+   it can be opened on hover and focus, rather than as another button. */
+.pmc-work-item-open {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-weight: 650;
+  text-align: left;
+  cursor: pointer;
+}
+
+.pmc-work-item-open:hover {
+  color: var(--pmc-color-primary-hover);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.pmc-work-item-open:focus-visible {
+  border-radius: 4px;
+  outline: var(--pmc-focus-width) solid var(--pmc-color-focus);
+  outline-offset: 2px;
+}
+
+.pmc-work-item-detail-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--pmc-space-3);
+}
+
+.pmc-work-item-detail-next {
+  display: grid;
+  gap: var(--pmc-space-2);
+  padding-bottom: var(--pmc-space-5);
+}
+
+.pmc-work-item-detail-heading {
+  margin: 0;
+  color: var(--pmc-color-text-muted);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  font-weight: 650;
+}
+
+.pmc-work-item-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  margin-top: 5px;
+  color: var(--pmc-color-text-muted);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  font-variant-numeric: tabular-nums;
+}
+
+.pmc-work-item-intents {
+  display: block;
+  margin-top: 4px;
+  color: var(--pmc-color-text-muted);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+}
+
+.pmc-work-queue-attention {
+  display: grid;
+  gap: 6px;
+  min-width: 190px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pmc-work-queue-attention li {
+  position: relative;
+  padding-left: 16px;
+  line-height: 1.45;
+}
+
+/* Shape and colour both: a triangle for a broken or blocked commitment, a
+   diamond for what needs a decision soon, a circle for the rest. */
+.pmc-work-queue-attention li::before {
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  font-size: 0.72em;
+  content: "●";
+  color: var(--pmc-color-status-info-fg);
+}
+
+.pmc-work-queue-attention li[data-tier="breachedCommitment"]::before,
+.pmc-work-queue-attention li[data-tier="blocked"]::before {
+  content: "▲";
+  color: var(--pmc-color-status-danger-fg);
+}
+
+.pmc-work-queue-attention li[data-tier="evidenceIntegrity"]::before,
+.pmc-work-queue-attention li[data-tier="approachingDeadline"]::before,
+.pmc-work-queue-attention li[data-tier="noAccountableOwner"]::before {
+  content: "◆";
+  color: var(--pmc-color-status-warning-fg);
+}
+
+.pmc-work-queue-uncertainty {
+  display: block;
+  color: var(--pmc-color-text-muted);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+}
+
+.pmc-work-item-clear {
+  color: var(--pmc-color-text-muted);
+}
+
+.pmc-work-item-deadline {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.pmc-work-item-promised {
+  display: block;
+  color: var(--pmc-color-text-muted);
+  font-size: 0.875em;
+}
+
+.pmc-work-item-placement {
+  min-width: 132px;
+  color: var(--pmc-color-text-muted);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  line-height: 1.5;
+}
+
+.pmc-work-queue-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 6px;
+  min-width: 190px;
+}
+
+.pmc-work-queue-rationale {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  min-width: 260px;
+  margin-top: 6px;
+  padding: 12px;
+  border: 1px solid var(--pmc-color-border-subtle);
+  border-radius: var(--pmc-radius-md);
+  background: var(--pmc-color-bg);
+}
+
+.pmc-work-queue-rationale label {
+  display: grid;
+  gap: 4px;
+  color: var(--pmc-color-text-muted);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+}
+
+.pmc-work-queue-rationale fieldset {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 10px;
+  border: 1px solid var(--pmc-color-border-subtle);
+  border-radius: 8px;
+}
+
+.pmc-work-queue-rationale fieldset label {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  color: var(--pmc-color-text);
+}
+
+.pmc-work-queue-rationale legend {
+  padding: 0 4px;
+  color: var(--pmc-color-text-muted);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+}
+
+.pmc-work-queue-rationale textarea,
+.pmc-work-queue-rationale input:not([type="checkbox"]),
+.pmc-work-queue-rationale select {
+  width: 100%;
+  min-height: var(--pmc-control-height-compact);
+  padding: 6px 8px;
+  border: 1px solid var(--pmc-color-border-control);
+  border-radius: var(--pmc-radius-sm);
+  background: var(--pmc-color-surface);
+  color: var(--pmc-color-text);
+  font: inherit;
+}
+
+.pmc-work-queue-rationale textarea {
+  min-height: 64px;
+  resize: vertical;
+}
+
+.pmc-work-queue-paging {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--pmc-space-2);
+  margin-top: var(--pmc-space-4);
+}
+
+.pmc-work-queue-status {
+  display: grid;
+  gap: var(--pmc-space-3);
+  max-width: 640px;
+}
+
+/* -------------------------------------------------------- executive lens --- */
+/* The DG1 Portfolio Lens (prototype .lens-*), on the amended S01 axes. Only
+   the two dividers are drawn: the axes are categorical across and a share up,
+   so finer gridlines would suggest a precision the measures do not have.
+   Unknown sits in labelled bands outside the quadrants. */
+
+.pmc-lens-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.42fr);
+  gap: var(--pmc-space-4);
+  align-items: start;
+  margin-bottom: var(--pmc-space-5);
+}
+
+.pmc-lens-surface,
+.pmc-lens-inspector {
+  min-width: 0;
+  border: 1px solid var(--pmc-color-border-subtle);
+  border-radius: var(--pmc-radius-lg);
+  background: var(--pmc-color-surface);
+}
+
+.pmc-lens-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--pmc-space-4);
+  padding: 17px 18px 14px;
+  border-bottom: 1px solid var(--pmc-color-border-subtle);
+}
+
+.pmc-lens-head h3 {
+  margin: 0;
+  font-size: calc(var(--pmc-type-section-title-size) * var(--pmc-app-scale));
+  line-height: var(--pmc-type-section-title-line);
+  font-weight: var(--pmc-type-section-title-weight);
+}
+
+.pmc-lens-head p {
+  margin: 3px 0 0;
+  color: var(--pmc-color-text-muted);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+}
+
+.pmc-lens-modes {
+  /* Keeps the three modes on one row; the description beside it wraps. */
+  flex: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.pmc-lens-modes .pmc-button[aria-pressed="true"] {
+  border-color: var(--pmc-color-text);
+  background: var(--pmc-color-text);
+  color: var(--pmc-color-surface);
+}
+
+.pmc-lens-canvas {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  grid-template-rows: 440px 84px;
+  border-bottom: 1px solid var(--pmc-color-border-subtle);
+}
+
+.pmc-lens-plot,
+.pmc-lens-band {
+  position: relative;
+  min-width: 0;
+}
+
+.pmc-lens-plot {
+  grid-column: 2;
+  grid-row: 1;
+  background:
+    linear-gradient(
+      90deg,
+      transparent calc(50% - 0.5px),
+      var(--pmc-color-chart-grid) calc(50% - 0.5px),
+      var(--pmc-color-chart-grid) calc(50% + 0.5px),
+      transparent calc(50% + 0.5px)
+    ),
+    linear-gradient(
+      0deg,
+      transparent calc(50% - 0.5px),
+      var(--pmc-color-chart-grid) calc(50% - 0.5px),
+      var(--pmc-color-chart-grid) calc(50% + 0.5px),
+      transparent calc(50% + 0.5px)
+    );
+}
+
+.pmc-lens-band {
+  background: var(--pmc-color-surface-muted);
+}
+
+.pmc-lens-band-x {
+  grid-column: 1;
+  grid-row: 1;
+  border-right: 1px dashed var(--pmc-color-border-control);
+}
+
+.pmc-lens-band-y {
+  grid-column: 2;
+  grid-row: 2;
+  border-top: 1px dashed var(--pmc-color-border-control);
+}
+
+.pmc-lens-band-corner {
+  grid-column: 1;
+  grid-row: 2;
+  border-top: 1px dashed var(--pmc-color-border-control);
+  border-right: 1px dashed var(--pmc-color-border-control);
+}
+
+.pmc-lens-band-label,
+.pmc-lens-axis,
+.pmc-lens-quadrant {
+  position: absolute;
+  color: var(--pmc-color-text-muted);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  pointer-events: none;
+}
+
+.pmc-lens-band-label {
+  top: 8px;
+  left: 10px;
+}
+
+/* Latin and Hangul read turned on their side, bottom to top; Chinese and
+   Japanese stack upright. The catalogs' arrow follows each: "↑" upright,
+   "→" turned (which then points up). */
+.pmc-lens-axis-y {
+  top: var(--pmc-space-3);
+  right: var(--pmc-space-3);
+  writing-mode: sideways-lr;
+}
+
+/* A runtime older than Chromium 132 lacks sideways-lr: turn the vertical
+   line half a turn instead, which reads the same, bottom to top. */
+@supports not (writing-mode: sideways-lr) {
+  .pmc-lens-axis-y {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+  }
+}
+
+:lang(zh) .pmc-lens-axis-y,
+:lang(ja) .pmc-lens-axis-y {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  transform: none;
+}
+
+.pmc-lens-axis-x {
+  right: var(--pmc-space-3);
+  bottom: 8px;
+}
+
+.pmc-lens-quadrant {
+  /* Above the bubbles: longer quadrant names (English, Spanish) reach the
+     first bubble, and the name must stay readable. A hovered or focused
+     bubble still rises above it. */
+  z-index: 1;
+  padding: 4px 8px;
+  border-radius: var(--pmc-radius-sm);
+  background: color-mix(in srgb, var(--pmc-color-surface) 88%, transparent);
+  font-weight: 600;
+}
+
+.pmc-lens-quadrant[data-quadrant="keepMomentum"] {
+  left: 10px;
+  top: 10px;
+}
+
+.pmc-lens-quadrant[data-quadrant="monitorClosely"] {
+  left: calc(50% + 10px);
+  top: 10px;
+}
+
+.pmc-lens-quadrant[data-quadrant="exploreAndValidate"] {
+  left: 10px;
+  bottom: 10px;
+}
+
+.pmc-lens-quadrant[data-quadrant="prioritizeNow"] {
+  left: calc(50% + 10px);
+  bottom: 10px;
+}
+
+.pmc-lens-bubble {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--pmc-color-chart-axis);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--pmc-color-chart-1) 14%, var(--pmc-color-surface));
+  color: var(--pmc-color-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.pmc-lens-bubble[data-hollow="true"] {
+  border-style: dashed;
+  background: var(--pmc-color-surface);
+}
+
+/* What the mode marks: a heavier border and a halo, never colour alone. */
+.pmc-lens-bubble[data-emphasised="true"] {
+  border: 2px solid var(--pmc-color-status-danger-border);
+  background: var(--pmc-color-status-danger-bg);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--pmc-color-status-danger-bg) 80%, transparent);
+}
+
+.pmc-lens-bubble[data-selected="true"] {
+  box-shadow:
+    0 0 0 3px var(--pmc-color-surface),
+    0 0 0 5px var(--pmc-color-focus);
+}
+
+.pmc-lens-bubble:focus-visible {
+  outline: var(--pmc-focus-width) solid var(--pmc-color-focus);
+  outline-offset: var(--pmc-focus-offset);
+}
+
+.pmc-lens-bubble-label {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 50%;
+  max-width: 124px;
+  overflow: hidden;
+  transform: translateX(-50%);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  font-weight: 650;
+}
+
+.pmc-lens-tooltip {
+  position: absolute;
+  z-index: var(--pmc-z-popover);
+  left: 50%;
+  bottom: calc(100% + 12px);
+  width: min(320px, calc(100vw - 48px));
+  display: grid;
+  gap: 6px;
+  padding: var(--pmc-space-3);
+  transform: translateX(-50%);
+  border-radius: var(--pmc-radius-md);
+  background: var(--pmc-color-chart-reference);
+  color: var(--pmc-color-surface);
+  box-shadow: var(--pmc-shadow-floating);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  line-height: 1.5;
+  text-align: left;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--pmc-motion-fast) var(--pmc-ease-standard);
+}
+
+.pmc-lens-tooltip > strong {
+  font-size: calc(var(--pmc-type-body-size) * var(--pmc-app-scale));
+}
+
+.pmc-lens-tooltip > span {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 8px;
+}
+
+.pmc-lens-tooltip b {
+  font-weight: 600;
+  opacity: 0.66;
+}
+
+.pmc-lens-tooltip small {
+  font-size: inherit;
+  opacity: 0.84;
+}
+
+.pmc-lens-tooltip small:first-of-type {
+  margin-top: 2px;
+  padding-top: 8px;
+  border-top: 1px solid color-mix(in srgb, var(--pmc-color-surface) 28%, transparent);
+}
+
+.pmc-lens-bubble[data-tooltip-below="true"] .pmc-lens-tooltip {
+  top: calc(100% + 26px);
+  bottom: auto;
+}
+
+.pmc-lens-bubble:hover,
+.pmc-lens-bubble:focus-visible {
+  z-index: var(--pmc-z-popover);
+}
+
+.pmc-lens-bubble:hover .pmc-lens-tooltip,
+.pmc-lens-bubble:focus-visible .pmc-lens-tooltip {
+  opacity: 1;
+}
+
+.pmc-lens-legend,
+.pmc-lens-empty {
+  margin: 0;
+  padding: var(--pmc-space-3) 18px;
+  color: var(--pmc-color-text-muted);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+}
+
+.pmc-lens-table {
+  overflow-x: auto;
+  border-top: 1px solid var(--pmc-color-border-subtle);
+}
+
+.pmc-lens-table table {
+  width: 100%;
+  border-spacing: 0;
+  font-size: calc(var(--pmc-type-table-size) * var(--pmc-app-scale));
+}
+
+.pmc-lens-table caption {
+  padding: var(--pmc-space-3) 18px 0;
+  color: var(--pmc-color-text-muted);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  text-align: left;
+}
+
+.pmc-lens-table th,
+.pmc-lens-table td {
+  padding: 10px 18px 10px 0;
+  border-bottom: 1px solid var(--pmc-color-border-subtle);
+  font-weight: 400;
+  text-align: left;
+  vertical-align: top;
+}
+
+.pmc-lens-table th:first-child {
+  padding-left: 18px;
+}
+
+.pmc-lens-table thead th {
+  color: var(--pmc-color-text-muted);
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.pmc-lens-table tbody th {
+  font-weight: 650;
+}
+
+.pmc-lens-table tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.pmc-lens-table tr[data-selected="true"] > * {
+  background: var(--pmc-color-surface-selected);
+}
+
+.pmc-lens-inspector {
+  position: sticky;
+  top: var(--pmc-space-4);
+  display: grid;
+  gap: var(--pmc-space-4);
+  padding: 18px;
+}
+
+.pmc-lens-inspector-empty {
+  margin: 0;
+  color: var(--pmc-color-text-muted);
+}
+
+.pmc-lens-measures {
+  display: grid;
+  gap: var(--pmc-space-3);
+  padding-bottom: var(--pmc-space-4);
+  border-bottom: 1px solid var(--pmc-color-border-subtle);
+}
+
+.pmc-lens-measures h3 {
+  margin: 0;
+  font-size: calc(var(--pmc-type-section-title-size) * var(--pmc-app-scale));
+  line-height: var(--pmc-type-section-title-line);
+}
+
+/* The review sheet's label column is sized for a dialog; the inspector is
+   narrower, so its labels take only the room their words need. */
+.pmc-lens-measures .pmc-h2a-field {
+  grid-template-columns: 5.5em minmax(0, 1fr);
+  gap: var(--pmc-space-3);
+}
+
+.pmc-lens-measures dd {
+  overflow-wrap: normal;
+  line-break: strict;
+}
+
+.pmc-lens-measures-fold {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pmc-space-2);
+  margin: 0;
+  color: var(--pmc-color-text-muted);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+}
+
+.pmc-lens-states {
+  margin: 4px 0 0;
+  padding-left: 1.2em;
+  color: var(--pmc-color-text-muted);
+}
+
+.pmc-lens-sources summary {
+  cursor: pointer;
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  font-weight: 600;
+}
+
+.pmc-lens-sources ul,
+.pmc-lens-sources p {
+  margin: var(--pmc-space-2) 0 0;
+  padding-left: 1.2em;
+  color: var(--pmc-color-text-muted);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* ------------------------------------------------------- cockpit sections --- */
+
+.pmc-cockpit-band {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  align-items: start;
+  gap: var(--pmc-space-4);
+  margin-bottom: var(--pmc-space-5);
+}
+
+.pmc-cockpit-band > section,
+.pmc-cockpit-attention,
+.pmc-cockpit-briefing {
+  padding: 16px 18px;
+  border: 1px solid var(--pmc-color-border-subtle);
+  border-radius: var(--pmc-radius-lg);
+  background: var(--pmc-color-surface);
+}
+
+.pmc-cockpit-attention,
+.pmc-cockpit-briefing {
+  margin-bottom: var(--pmc-space-5);
+}
+
+.pmc-cockpit h3 {
+  margin: 0 0 var(--pmc-space-2);
+  font-size: calc(var(--pmc-type-section-title-size) * var(--pmc-app-scale));
+  line-height: var(--pmc-type-section-title-line);
+}
+
+.pmc-cockpit-band p,
+.pmc-cockpit-briefing p {
+  margin: 0 0 6px;
+  line-height: 1.5;
+}
+
+.pmc-cockpit-pulse {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--pmc-space-4);
+  margin: 0;
+}
+
+.pmc-cockpit-count dt {
+  color: var(--pmc-color-text-muted);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  font-weight: 650;
+}
+
+.pmc-cockpit-count dd {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+}
+
+.pmc-cockpit-count-value {
+  font-size: calc(var(--pmc-type-page-title-size) * var(--pmc-app-scale));
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+
+.pmc-cockpit-count-definition,
+.pmc-cockpit-count-owner,
+.pmc-cockpit-limit {
+  color: var(--pmc-color-text-muted);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  line-height: 1.45;
+}
+
+.pmc-cockpit-exceptions {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pmc-cockpit-exceptions li {
+  display: grid;
+  gap: 3px;
+  padding: 12px 0 12px 16px;
+  border-top: 1px solid var(--pmc-color-border-subtle);
+  box-shadow: inset 3px 0 0 var(--pmc-color-status-warning-border);
+}
+
+.pmc-cockpit-exceptions li:first-child {
+  border-top: 0;
+}
+
+.pmc-cockpit-exceptions li[data-tier="breachedCommitment"],
+.pmc-cockpit-exceptions li[data-tier="blocked"] {
+  box-shadow: inset 3px 0 0 var(--pmc-color-status-danger-border);
+}
+
+.pmc-cockpit-exceptions p {
+  margin: 0;
+}
+
+.pmc-cockpit-exception-what {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pmc-space-2);
+}
+
+.pmc-cockpit-exception-label {
+  font-weight: 650;
+}
+
+.pmc-cockpit-exception-why {
+  color: var(--pmc-color-text-muted);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+}
+
+.pmc-cockpit-conclusion {
+  font-weight: 600;
+}
+
+.pmc-cockpit-status {
+  display: grid;
+  gap: var(--pmc-space-3);
+  max-width: 640px;
+}
+
+@media (max-width: 1100px) {
+  .pmc-lens-layout,
+  .pmc-cockpit-band {
+    grid-template-columns: 1fr;
+  }
+
+  .pmc-lens-inspector {
+    position: static;
+  }
+}
+
+@media (max-width: 720px) {
+  .pmc-lens-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .pmc-lens-canvas {
+    grid-template-columns: 72px minmax(0, 1fr);
+    grid-template-rows: 340px 84px;
+  }
+
+  .pmc-lens-quadrant {
+    display: none;
+  }
+
+  .pmc-cockpit-pulse {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pmc-lens-tooltip {
+    transition: none;
+  }
+}
+
+/* Chinese runs break at the spaces and commas the lines already carry. */
+.pmc-lens-table td {
+  word-break: keep-all;
+}
+
+.pmc-lens-table td:nth-child(5) {
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------- O01 inspector --- */
+/* The shared Product inspector, set for the narrow column it now occupies
+   beside the Lens (prototype .lens-inspector-*). */
+
+.pmc-inspector {
+  display: grid;
+  gap: var(--pmc-space-2);
+  font-size: calc(var(--pmc-type-table-size) * var(--pmc-app-scale));
+  line-height: 1.5;
+}
+
+.pmc-inspector > h3 {
+  margin: 0;
+  font-size: calc(var(--pmc-type-section-title-size) * var(--pmc-app-scale));
+  line-height: var(--pmc-type-section-title-line);
+}
+
+.pmc-inspector p,
+.pmc-inspector ul {
+  margin: 0;
+}
+
+.pmc-inspector ul {
+  padding-left: 1.2em;
+}
+
+.pmc-inspector-meta,
+.pmc-inspector-provenance,
+.pmc-inspector-via,
+.pmc-inspector-classifications {
+  color: var(--pmc-color-text-muted);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+}
+
+.pmc-inspector [role="tablist"] {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin-top: var(--pmc-space-2);
+  overflow: hidden;
+  border: 1px solid var(--pmc-color-border-subtle);
+  border-radius: var(--pmc-radius-sm);
+  background: var(--pmc-color-border-subtle);
+}
+
+.pmc-inspector [role="tab"] {
+  min-height: var(--pmc-control-height-compact);
+  border: 0;
+  background: var(--pmc-color-surface);
+  color: var(--pmc-color-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.pmc-inspector [role="tab"][aria-selected="true"] {
+  background: var(--pmc-color-text);
+  color: var(--pmc-color-surface);
+  font-weight: 650;
+}
+
+.pmc-inspector [role="tab"]:focus-visible {
+  outline: var(--pmc-focus-width) solid var(--pmc-color-focus);
+  outline-offset: -2px;
+}
+
+.pmc-inspector [role="tabpanel"] {
+  display: grid;
+  gap: var(--pmc-space-2);
+}
+
+/* --------------------------------------------- Portfolio, People, Vault --- */
+
+.pmc-lens-paging {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--pmc-space-2);
+  padding: var(--pmc-space-3) 18px;
+  border-top: 1px solid var(--pmc-color-border-subtle);
+}
+
+.pmc-cockpit-band .pmc-lens-paging {
+  padding: var(--pmc-space-3) 0 0;
+  border-top: 0;
+}
+
+.pmc-people-list {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pmc-people-none {
+  color: var(--pmc-color-text-muted);
+}
+
+/* A state in words with a shape beside it, so colour never carries it
+   alone: a filled dot for usable, a hollow one for not. */
+.pmc-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 24px;
+  padding: 0 10px;
+  border: 1px solid var(--pmc-color-status-info-border);
+  border-radius: 999px;
+  background: var(--pmc-color-status-info-bg);
+  color: var(--pmc-color-status-info-fg);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.pmc-status-pill::before {
+  width: 7px;
+  height: 7px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  background: currentColor;
+  content: "";
+}
+
+.pmc-status-pill[data-tone="success"] {
+  border-color: var(--pmc-color-status-success-border);
+  background: var(--pmc-color-status-success-bg);
+  color: var(--pmc-color-status-success-fg);
+}
+
+.pmc-status-pill[data-tone="warning"] {
+  border-color: var(--pmc-color-status-warning-border);
+  background: var(--pmc-color-status-warning-bg);
+  color: var(--pmc-color-status-warning-fg);
+}
+
+.pmc-status-pill[data-tone="warning"]::before {
+  background: transparent;
+}
+
+.pmc-vault-availability {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pmc-space-3);
+  margin: 0 0 var(--pmc-space-4);
+  line-height: 1.5;
+}
+
+.pmc-settings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--pmc-space-4);
+  align-items: start;
+}
+
+.pmc-settings-section {
+  padding: 16px 18px;
+}
+
+.pmc-settings-section h3,
+.pmc-settings-section .pmc-section-title {
+  margin: 0 0 var(--pmc-space-3);
+  font-size: calc(var(--pmc-type-section-title-size) * var(--pmc-app-scale));
+  line-height: var(--pmc-type-section-title-line);
+}
+
+.pmc-settings-section .pmc-text-scale-preview {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.pmc-settings-facts dd {
+  line-height: 1.6;
+}
+
+.pmc-settings-select {
+  width: 100%;
+  max-width: 320px;
+  min-height: var(--pmc-control-height-compact);
+  padding: 0 8px;
+  border: 1px solid var(--pmc-color-border-control);
+  border-radius: var(--pmc-radius-sm);
+  background: var(--pmc-color-surface);
+  color: var(--pmc-color-text);
+  font: inherit;
+}
+
+.pmc-inspector-meta {
+  margin: 0;
+}
+
+.pmc-inspector h4 {
+  margin: var(--pmc-space-2) 0 0;
+  color: var(--pmc-color-text-muted);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  font-weight: 650;
+}
+
+.pmc-inspector h5 {
+  margin: 0;
+  font-size: calc(var(--pmc-type-table-size) * var(--pmc-app-scale));
+  font-weight: 650;
+}
+
+.pmc-inspector-conditions li {
+  display: grid;
+  gap: 2px;
+}
+
+.pmc-inspector-conditions li + li {
+  margin-top: var(--pmc-space-2);
+}
+
+@media (max-width: 1100px) {
+  .pmc-settings-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* A Product name stays on one or two lines; the measures wrap instead. */
+.pmc-lens-table tbody th {
+  min-width: 9.5em;
+}
+
+/* A follow-up Action Request inside the resolve form: its fields stack like
+   every other form field; the checkbox row rule above is for Evidence lists. */
+.pmc-work-queue-rationale fieldset .pmc-work-queue-resulting {
+  display: grid;
+  gap: var(--pmc-space-2);
+  padding-bottom: var(--pmc-space-2);
+  border-bottom: 1px solid var(--pmc-color-border-subtle);
+}
+
+.pmc-work-queue-rationale fieldset .pmc-work-queue-resulting label {
+  display: grid;
+  gap: 4px;
+  color: var(--pmc-color-text-muted);
+}
+
+.pmc-work-queue-rationale fieldset .pmc-work-queue-resulting button {
+  justify-self: start;
+}
+
+/* Buttons inside the inspector read as the app's buttons, not the browser's. */
+.pmc-inspector button:not([role="tab"]) {
+  min-height: var(--pmc-control-height-compact);
+  padding: 0 12px;
+  border: 1px solid var(--pmc-color-border-subtle);
+  border-radius: 8px;
+  background: var(--pmc-color-surface);
+  color: var(--pmc-color-text);
+  font: inherit;
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pmc-inspector button:not([role="tab"]):hover:not(:disabled) {
+  background: var(--pmc-color-surface-muted);
+}
+
+.pmc-inspector button:not([role="tab"]):disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.pmc-inspector-evidence li {
+  display: grid;
+  gap: 4px;
+  padding: 6px 0;
+}
+
+/* The link form: the chooser takes the aside's width and no more, so a long
+   option cannot widen the whole inspector. */
+/* A result line and its Close button: the button sits under the message,
+   never squeezed onto the end of its last line. */
+p.pmc-inspector-link,
+p.pmc-inspector-evidence-result {
+  display: grid;
+  justify-items: start;
+  gap: var(--pmc-space-2);
+}
+
+form.pmc-inspector-link {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pmc-space-2);
+  min-width: 0;
+}
+
+form.pmc-inspector-link label {
+  display: grid;
+  flex: 1 1 100%;
+  gap: 4px;
+  min-width: 0;
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  font-weight: 600;
+}
+
+form.pmc-inspector-link select {
+  width: 100%;
+  min-width: 0;
+  min-height: var(--pmc-control-height-compact);
+  padding: 0 8px;
+  border: 1px solid var(--pmc-color-border-subtle);
+  border-radius: 8px;
+  background: var(--pmc-color-surface);
+  color: var(--pmc-color-text);
+  font: inherit;
+  font-weight: 400;
+}
+
+.pmc-inspector-evidence-actions,
+.pmc-inspector-evidence-confirm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pmc-space-2);
+}
+
+/* ------------------------------------------------- Settings → Backups --- */
+
+.pmc-backups-due {
+  margin: 0 0 var(--pmc-space-3);
+  color: var(--pmc-color-status-warning-fg);
+  font-weight: 650;
+}
+
+.pmc-backups-folder {
+  font-weight: 650;
+}
+
+.pmc-backups-section dd > div {
+  margin-top: var(--pmc-space-2);
+}
+
+.pmc-backups-orphans,
+.pmc-backups-progress,
+.pmc-backups-result {
+  margin: var(--pmc-space-2) 0 0;
+  color: var(--pmc-color-text-muted);
+}
+
+/* The Ledger upgrade gate (DG3 upgrade-gate amendment): in place of the
+   shell, one centred panel. */
+.pmc-upgrade-gate {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: var(--pmc-space-6) var(--pmc-space-4);
+  background: var(--pmc-color-bg);
+  /* In place of the shell, so it sets the shell's type itself: without this
+     the gate falls back to the browser's serif. */
+  color: var(--pmc-color-text);
+  font-family: var(--pmc-font-family-ui);
+  font-size: calc(var(--pmc-type-body-size) * var(--pmc-app-scale));
+  line-height: var(--pmc-type-body-line);
+  -webkit-font-smoothing: antialiased;
+}
+
+.pmc-upgrade-gate button {
+  font: inherit;
+}
+
+.pmc-upgrade-panel {
+  width: min(720px, 100%);
+  display: grid;
+  gap: var(--pmc-space-4);
+  padding: var(--pmc-space-6);
+}
+
+/* ----------------------------------------- the sample workspace (item ⑨) --- */
+
+/* "Choose how to begin": two equal choices side by side, neither
+   preselected; each is one button holding its title and what it means. */
+/* The gate's title takes focus so a screen reader starts there; it is not a
+   control, so it shows no focus ring. */
+#pmc-first-run-title:focus {
+  outline: none;
+}
+
+.pmc-first-run-choices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--pmc-space-3);
+}
+
+.pmc-first-run-choice {
+  display: grid;
+  align-content: start;
+  gap: var(--pmc-space-2);
+  padding: var(--pmc-space-4);
+  border: 1px solid var(--pmc-color-border-control);
+  border-radius: var(--pmc-radius-md);
+  background: var(--pmc-color-surface);
+  color: var(--pmc-color-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.pmc-first-run-choice:hover:not(:disabled) {
+  border-color: var(--pmc-color-primary-boundary);
+  background: var(--pmc-color-surface-muted);
+}
+
+.pmc-first-run-choice:focus-visible {
+  outline: var(--pmc-focus-width) solid var(--pmc-color-focus);
+  outline-offset: var(--pmc-focus-offset);
+}
+
+.pmc-first-run-choice:disabled {
+  color: var(--pmc-color-text-disabled);
+  cursor: default;
+}
+
+.pmc-first-run-choice-title {
+  font-size: calc(var(--pmc-type-section-title-size) * var(--pmc-app-scale));
+  font-weight: 650;
+}
+
+.pmc-first-run-choice-body,
+.pmc-first-run-choice-note {
+  line-height: 1.5;
+}
+
+.pmc-first-run-choice-note {
+  color: var(--pmc-color-text-muted);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+}
+
+/* The sample marker (§5): the words carry it; the hollow square beside them
+   is a second, non-colour cue that this is not the person's own work. */
+.pmc-sample-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 10px;
+  border: 1px dashed var(--pmc-color-status-warning-border);
+  border-radius: var(--pmc-radius-sm);
+  background: var(--pmc-color-status-warning-bg);
+  color: var(--pmc-color-status-warning-fg);
+  font: inherit;
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.pmc-sample-badge::before {
+  width: 8px;
+  height: 8px;
+  border: 1.5px solid currentColor;
+  content: "";
+}
+
+button.pmc-sample-badge {
+  cursor: pointer;
+}
+
+button.pmc-sample-badge:focus-visible {
+  outline: var(--pmc-focus-width) solid var(--pmc-color-focus);
+  outline-offset: var(--pmc-focus-offset);
+}
+
+/* Where there is no top bar (the upgrade gate), the marker keeps the same
+   corner the top bar would give it. */
+.pmc-sample-badge-standalone {
+  position: fixed;
+  top: var(--pmc-space-3);
+  right: var(--pmc-space-4);
+  z-index: 1;
+}
+
+/* Settings → Workspace: its lines, choices and confirmations stack with one
+   rhythm instead of each carrying its own margin. */
+.pmc-workspace-section {
+  display: grid;
+  align-content: start;
+  gap: var(--pmc-space-3);
+}
+
+.pmc-workspace-section h3 {
+  margin: 0;
+}
+
+.pmc-workspace-subtitle {
+  margin: var(--pmc-space-2) 0 0;
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  font-weight: 650;
+}
+/* A dialog's backdrop dims the top bar: while one is open, the top-bar
+   badge is lifted above it, so the marker stays readable on every dialog.
+   It cannot be pressed then — the dialog keeps the focus. */
+body:has(.pmc-dialog-backdrop) .pmc-topbar-actions .pmc-sample-badge {
+  position: relative;
+  z-index: calc(var(--pmc-z-dialog) + 1);
+  pointer-events: none;
+}
+.pmc-workspace-confirm {
+  display: grid;
+  gap: var(--pmc-space-3);
+}
+
+.pmc-sample-digest {
+  overflow-wrap: anywhere;
+  font-variant-numeric: var(--pmc-font-variant-tabular);
+}
+
+.pmc-sample-delete-parts {
+  margin: 0;
+  padding-left: 1.25em;
+}
+/* ------------------------------------ getting started (2026-09-24) --- */
+
+/* Your own workspace's setup, in the order the host requires it. Each state
+   is written out and carries a shape, not colour alone: filled for done, a
+   ring for the next step, a dashed ring for a step still waiting. */
+.pmc-getting-started {
+  display: grid;
+  gap: var(--pmc-space-3);
+  margin-bottom: var(--pmc-space-5);
+  padding: 16px 18px;
+}
+
+.pmc-getting-started h3 {
+  margin: 0;
+  font-size: calc(var(--pmc-type-section-title-size) * var(--pmc-app-scale));
+}
+
+.pmc-getting-started-steps {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--pmc-color-border-subtle);
+}
+
+.pmc-getting-started-step {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: var(--pmc-space-3);
+  padding: var(--pmc-space-3) 0;
+  border-bottom: 1px solid var(--pmc-color-border-subtle);
+}
+
+.pmc-getting-started-mark {
+  width: 14px;
+  height: 14px;
+  border: 2px dashed var(--pmc-color-text-muted);
+  border-radius: 50%;
+}
+
+.pmc-getting-started-step[data-state="next"] .pmc-getting-started-mark {
+  border-style: solid;
+  border-color: var(--pmc-color-primary-fill);
+}
+
+.pmc-getting-started-step[data-state="done"] .pmc-getting-started-mark {
+  border-style: solid;
+  border-color: var(--pmc-color-status-success-fg);
+  background: var(--pmc-color-status-success-fg);
+}
+
+.pmc-getting-started-text {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.pmc-getting-started-title {
+  font-weight: 650;
+}
+
+.pmc-getting-started-step[data-state="done"] .pmc-getting-started-title {
+  color: var(--pmc-color-text-muted);
+}
+
+.pmc-getting-started-why,
+.pmc-getting-started-status {
+  color: var(--pmc-color-text-muted);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  line-height: 1.5;
+}
+
+.pmc-getting-started-step[data-state="next"] .pmc-getting-started-status {
+  color: var(--pmc-color-text);
+  font-weight: 650;
+}
+/* ------------------------------------------------ record entry (slice 6B) --- */
+
+/* The sheet's fields stack; a text field, its counter and its reason read as
+   one unit, and the classification choices wrap as a row of badges. */
+.pmc-record-sheet {
+  width: min(560px, 100%);
+}
+
+.pmc-record-fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pmc-space-3);
+}
+
+.pmc-record-field {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.pmc-record-field .pmc-h2b-confirmation-input {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.pmc-record-textarea {
+  min-height: calc(var(--pmc-control-height-standard) * 2.4);
+  padding: var(--pmc-space-2) var(--pmc-space-3);
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.pmc-record-count {
+  margin: 0;
+  color: var(--pmc-color-text-muted);
+  font-size: calc(var(--pmc-type-supporting-size) * var(--pmc-app-scale));
+  font-variant-numeric: var(--pmc-font-variant-tabular);
+}
+
+.pmc-record-count[data-over="true"] {
+  color: var(--pmc-color-status-danger-fg);
+}
+
+.pmc-record-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pmc-space-2) var(--pmc-space-4);
+}
+
+.pmc-record-choices .pmc-passphrase-check {
+  align-items: center;
+}
+
+.pmc-record-choices input {
+  margin: 0;
+}
+
+.pmc-record-discard {
+  display: grid;
+  gap: var(--pmc-space-2);
+  padding: var(--pmc-space-3);
+  border: 1px solid var(--pmc-color-status-warning-border);
+  border-radius: var(--pmc-radius-md);
+  background: var(--pmc-color-status-warning-bg);
+}
+
+.pmc-record-discard .pmc-h2b-irreversible-statement {
+  margin: 0;
+}
+
+/* Action rows on the Portfolio route and in the inspector. */
+.pmc-entry-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pmc-space-2);
+}
+
+/* The Work Queue's row of new-record sheets sits above the filters (6E). */
+.pmc-work-queue-entry {
+  margin: 0 0 var(--pmc-space-4);
+}
+
+.pmc-entry-notice {
+  margin: 0 0 var(--pmc-space-3);
+  color: var(--pmc-color-status-success-fg);
+  font-weight: 650;
+}
+
+.pmc-entry-portfolios {
+  margin-bottom: var(--pmc-space-4);
+}
+
+.pmc-entry-list {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0 18px;
+  list-style: none;
+}
+
+.pmc-entry-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--pmc-space-2) var(--pmc-space-4);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--pmc-color-border-subtle);
+}
+
+.pmc-entry-list li:last-child {
+  border-bottom: 0;
+}
+
+.pmc-inspector-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--pmc-space-2) var(--pmc-space-4);
+}
+
+.pmc-inspector-head h3 {
+  margin: 0;
+}
+
+.pmc-inspector-structure li .pmc-entry-actions {
+  margin-top: 4px;
+}
+
+/* What a link will record, shown once a candidate is chosen (§3.3). */
+.pmc-record-preview {
+  margin: 0;
+  color: var(--pmc-color-text);
+  font-weight: 650;
+}

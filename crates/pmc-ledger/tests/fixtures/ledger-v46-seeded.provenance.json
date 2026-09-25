@@ -1,0 +1,11 @@
+{
+  "format": "pmc-ledger-fixture-provenance/v1",
+  "file": "ledger-v46-seeded.sqlite3",
+  "source_commit": "7beb1db134ea22b4ca0d71da83b696dbe2c9d282",
+  "creator": "SqliteProductLedger::open + pmc-seed Training scenario",
+  "schema_version": 46,
+  "ledger_revision": 156,
+  "fixture_sha256": "c6beb0fcfa21ff5838ae60690234427604d33b6f3bee0a0845de78288e6efce4",
+  "authority_inventory_sha256": "a4beff1de7fc5a31c2ca108d4c621137e7c97b87e8e5492b6d3829cb86b28e44",
+  "authority_record_count": 139
+}

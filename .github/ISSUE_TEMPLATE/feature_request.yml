@@ -1,0 +1,21 @@
+name: Feature request
+description: Suggest something that would make Product Mission Control more useful.
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What are you trying to do, and what gets in the way today? Describe the problem rather than the screen you have in mind.
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: What a good outcome looks like
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: What you do instead today

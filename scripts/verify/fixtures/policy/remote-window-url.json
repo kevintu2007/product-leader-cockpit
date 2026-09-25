@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Fixture",
+  "version": "0.1.0",
+  "identifier": "com.example.fixture",
+  "app": {
+    "security": {
+      "csp": "default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' ipc: http://ipc.localhost"
+    },
+    "windows": [{ "title": "Fixture", "url": "https://example.invalid" }]
+  }
+}

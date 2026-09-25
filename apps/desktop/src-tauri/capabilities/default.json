@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Static desktop window capability with no IPC or native plugin permissions.",
+  "windows": ["main"],
+  "permissions": []
+}

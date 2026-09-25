@@ -1,0 +1,13 @@
+[package]
+name = "pmc-knowledge"
+version = "0.2.0-beta"
+edition = "2021"
+rust-version = "1.88"
+
+[dependencies]
+pmc-domain = { path = "../pmc-domain" }
+pmc-platform = { path = "../pmc-platform" }
+sha2 = "=0.10.9"
+
+[lib]
+path = "src/lib.rs"
