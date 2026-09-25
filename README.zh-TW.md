@@ -147,9 +147,10 @@ Product Mission Control 是一個 Windows 桌面應用程式，給一個負責�
 
 ## 怎麼做出來的
 
-我是 Head of Products，不是職業工程師。這個專案是我帶著 AI coding agent，在我訂下並執行的規則下
-做出來的：Claude Code 一次寫一小片並先寫測試，Codex 獨立審查每一片；完整驗證沒通過、我沒看過真實
-app 的截圖並接受之前，任何東西都不會進主線。
+我的背景是 tech marketing 與產品管理，負責整合公司的產品和專案；這個工具是我以 Head of Products
+的視角，為公司整個產品組合做的。它是我帶著 AI coding agent，在我訂下並執行的
+規則下做出來的：Claude Code 一次只寫一小片，而且先寫測試；Codex 獨立審查每一片；完整驗證沒通過、
+我沒看過真實 app 的截圖並接受之前，任何東西都不會進主線。
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/media/pmc-how-it-was-built-dark.gif">

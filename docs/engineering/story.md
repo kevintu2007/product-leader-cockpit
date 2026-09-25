@@ -2,9 +2,14 @@
 
 [繁體中文](story.zh-TW.md)
 
-I am a Head of Products, not a career programmer. Product Mission Control started as a tool I
-built for myself, to run my own portfolio work. This repository is a revised and curated version of
-that private project, published so that other people can read how it works and how it was made.
+My background is in tech marketing and product management, and in my company I am the person who
+ties the products and projects together. Product Mission Control is the tool I built from the
+perspective of a Head of Products: being responsible for a company's whole product portfolio means
+keeping every product's and project's direction, outcomes, delivery commitments, decisions, risks
+and the evidence behind every judgment in view at once. It was developed in my private repository
+over the six weeks before this release, with each mechanism refined and verified along the way, and
+then consolidated into this public repository so that others can see how it works and how it was
+made.
 
 ## Why I built it
 
@@ -25,16 +30,18 @@ Three rules followed from that:
 - There is always a way back. Strict rules must never deadlock the work, so partly verified Evidence
   can move forward with a written Judgment, while unverified Evidence cannot.
 
-## Foundation before code
+## Thinking first, then building
 
-I did not start with code. The first week produced the foundation, using
+I began by thinking the design and architecture through, and let that guide the development: what
+the product is for, where the privacy boundaries sit, what the domain terms mean, how the
+architecture is layered, how errors are handled, which commands verify the work and how the review
+process would work. In the first week I put that foundation in place, using
 [Project Kickoff Foundation](https://github.com/kevintu2007/project-kickoff-foundation), an agent
-skill I published earlier for exactly this step: product purpose, privacy boundaries, domain
-language, architecture layers, error handling, verification commands and the review workflow, each
-marked confirmed, proposed or open.
+skill I had published earlier for exactly this step, with every item marked confirmed, proposed or
+open. Everything built afterwards followed it.
 
-Design came next, as a series of gates: a concept, a design brief with an interactive prototype, and
-a UI contract that I froze before the first line of application code on 17 August 2026.
+Design came next, as a series of gates: a concept, then a design brief with an interactive
+prototype, then a UI contract, frozen on 17 August 2026 before the first line of application code.
 
 <p align="center">
   <img src="images/design-portfolio-command.png" width="820" alt="Design prototype of the Portfolio command screen: a Portfolio Lens comparing Products, an owner work list ranked by attention, and every measure carrying its definition">
@@ -74,7 +81,7 @@ widen scope on their own; and nothing is called done because its structure looks
 
 ## What the review gates caught
 
-The reviews were not ceremony. A few of the findings, all fixed before the work moved on:
+The reviews were not a formality. A few of the findings, all fixed before the work moved on:
 
 - **13 August, design review.** A report being written in the prototype would lose unsaved text
   when the screen re-rendered.
@@ -139,9 +146,9 @@ evaluated by the reviewer first, decided by me in writing, and then built.
   Windows does. What remains open is written down: a time-of-check window that only the Windows API
   can close is listed as a known limitation rather than hidden.
 
-## From a private tool to this repository
+## From the private repository to this one
 
-The private project keeps its full history, its agent instructions and its review records. This
+The private repository keeps the full history, the agent instructions and the review records. This
 repository is produced from it by a one-way export: an allowlist of product files, documentation
 rewritten against the code as it is today, and a scan that refuses any file carrying private paths,
 addresses or internal references. Before publishing, the code comments were revised so each one
