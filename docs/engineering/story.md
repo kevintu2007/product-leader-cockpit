@@ -2,11 +2,10 @@
 
 [繁體中文](story.zh-TW.md)
 
-My background is in tech marketing and product management, and in my company I am the person who
-ties the products and projects together. Product Mission Control is the tool I built from the
-perspective of a Head of Products: being responsible for a company's whole product portfolio means
-keeping every product's and project's direction, outcomes, delivery commitments, decisions, risks
-and the evidence behind every judgment in view at once. It was developed in my private repository
+This application is designed for the role of Head of Products. Product Mission Control is the tool
+I built for that role: one person who has to hold a whole product portfolio in view, with every
+product's and project's direction, outcomes, delivery commitments, decisions, risks and the evidence
+behind every judgment. It was developed in my private repository
 over the six weeks before this release, with each mechanism refined and verified along the way, and
 then consolidated into this public repository so that others can see how it works and how it was
 made.

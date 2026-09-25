@@ -163,8 +163,8 @@ repository on its own. Issues are welcome here; pull requests are not accepted d
 
 ## How it was built
 
-My background is in tech marketing and product management, tying a company's products and projects
-together; this is the tool I built from a Head of Products' perspective, for the whole portfolio. I built it by directing AI
+This is a tool built for the role of Head of Products, covering a company's whole product
+portfolio. I built it by directing AI
 coding agents under rules I set and enforced: Claude Code writes and tests one slice at a time, Codex reviews every slice
 independently, and nothing reaches the main branch until the full verification passes and I have
 accepted it from screenshots of the real app.
