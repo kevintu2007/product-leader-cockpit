@@ -1597,6 +1597,8 @@ fn a_format_1_preimage_is_still_readable_after_the_binary_moved_to_format_2() {
     );
 }
 
+// Windows only: a drive root such as `D:\` exists only there.
+#[cfg(windows)]
 #[test]
 fn a_drive_root_is_named_by_its_drive_rather_than_by_nothing() {
     // §2 shows the chosen folder's own name; a drive root has no last

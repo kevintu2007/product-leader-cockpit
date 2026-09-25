@@ -189,6 +189,8 @@ mod tests {
         let _ = fs::remove_dir_all(&directory);
     }
 
+    // Only the Windows tests below write a timestamped marker.
+    #[cfg(windows)]
     fn now_millis() -> i64 {
         std::time::SystemTime::now()
             .duration_since(std::time::UNIX_EPOCH)

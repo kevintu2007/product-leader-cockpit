@@ -134,6 +134,9 @@ fn a_refused_change_writes_nothing() {
     );
 }
 
+// Windows only: the control lock excludes other writers through a no-sharing
+// open, which exists only there (see `RestoreControlStore::lock`).
+#[cfg(windows)]
 #[test]
 fn only_one_of_two_concurrent_claims_succeeds() {
     let store = store();

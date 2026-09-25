@@ -602,6 +602,10 @@ impl RestoreControlStore {
         Ok(Ok(decided))
     }
 
+    /// An exclusive hold on `<control>.lock`, released when dropped. On
+    /// Windows the file is opened with no sharing, which other processes
+    /// cannot also do, and the OS releases it if this process dies. Elsewhere
+    /// it serializes nothing across processes (PMC ships for Windows only).
     fn lock(&self) -> Result<File, RestoreControlError> {
         let mut name = self.path.as_os_str().to_owned();
         name.push(".lock");

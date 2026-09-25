@@ -5,6 +5,7 @@
 //! over IPC.
 
 use std::path::PathBuf;
+#[cfg(windows)]
 use std::sync::mpsc;
 
 /// Ask the person for a folder, as a modal dialog owned by `parent`. `None`

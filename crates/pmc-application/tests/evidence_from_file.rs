@@ -256,8 +256,9 @@ fn a_file_that_already_has_a_reference_offers_that_one_and_same_content_warns() 
     )
     .unwrap_or_else(|error| panic!("{error:?}"));
 
-    // The same file chosen again, spelled differently.
-    let again = choose(&vault, &root.join("reports").join("q3.MD"), 2_000);
+    // The same file chosen again (another letter case is the Windows-only
+    // test below).
+    let again = choose(&vault, &file, 2_000);
     let preview = preview_chosen_file(&ledger, &again, ascii_case_insensitive)
         .unwrap_or_else(|error| panic!("{error:?}"));
     assert_eq!(
@@ -316,6 +317,52 @@ fn a_file_that_already_has_a_reference_offers_that_one_and_same_content_warns() 
         ascii_case_insensitive,
     )
     .unwrap_or_else(|error| panic!("{error:?}"));
+}
+
+// Windows only: another letter case names the same file only where file names
+// ignore case.
+#[cfg(windows)]
+#[test]
+fn the_same_file_chosen_under_another_letter_case_offers_its_reference() {
+    let root = scratch("existing-case");
+    let vault = vault_at(&root);
+    let mut ledger = ledger(&scratch("existing-case-ledger"));
+    let mut ids = OpaqueIdSource::new();
+    let file = root.join("Reports").join("Q3.md");
+    write(&file, b"quarterly report");
+    let first = create_evidence_from_file(
+        &mut ledger,
+        &vault,
+        &choose(&vault, &file, 1_000),
+        DataClassification::Internal,
+        context("sheet-4a"),
+        &mut ids,
+        at(1_500),
+        ascii_case_insensitive,
+    )
+    .unwrap_or_else(|error| panic!("{error:?}"));
+
+    let again = choose(&vault, &root.join("reports").join("q3.MD"), 2_000);
+    let preview = preview_chosen_file(&ledger, &again, ascii_case_insensitive)
+        .unwrap_or_else(|error| panic!("{error:?}"));
+    assert_eq!(
+        preview.existing.as_ref().map(|found| found.id.clone()),
+        Some(first.id.clone())
+    );
+    assert!(preview.same_content.is_empty());
+    match create_evidence_from_file(
+        &mut ledger,
+        &vault,
+        &again,
+        DataClassification::Internal,
+        context("sheet-4b"),
+        &mut ids,
+        at(2_500),
+        ascii_case_insensitive,
+    ) {
+        Err(EvidenceFromFileError::AlreadyReferenced(found)) => assert_eq!(found.id, first.id),
+        other => panic!("expected AlreadyReferenced, got {other:?}"),
+    }
 }
 
 #[test]

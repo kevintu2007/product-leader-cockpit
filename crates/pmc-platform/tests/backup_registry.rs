@@ -188,6 +188,9 @@ fn a_known_archive_is_not_an_orphan_under_another_spelling_of_its_folder() {
     assert!(orphan_archives(&upper, &registry).is_empty());
 }
 
+// Windows only: the registry lock excludes other writers through a
+// no-sharing open, which exists only there (see `RegistryStore::lock`).
+#[cfg(windows)]
 #[test]
 fn concurrent_saves_from_the_same_read_let_exactly_one_through() {
     let dir = scratch("race");

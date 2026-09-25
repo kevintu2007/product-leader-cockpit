@@ -1,5 +1,8 @@
 import { expect, test } from "@playwright/test";
 
+import { ROUTES_EN } from "../src/i18n/catalogs/routes.en";
+import { SHELL_EN } from "../src/i18n/catalogs/shell.en";
+
 /**
  * Tier 1: the frozen DG3 presentation contracts, asserted against the real
  * assembled application in a real browser.
@@ -30,8 +33,22 @@ const PRIMARY_DESTINATIONS = [
 /** DG3 uses an en dash between the route name and the product name. */
 const TITLE_SEPARATOR = "–";
 
+/** The browser runs in en-US, so the renderer speaks English. Read from the
+ * catalogue, so a wording change cannot leave these tests pinning old text. */
+const ROUTE_PLACEHOLDER = SHELL_EN["shell.routePlaceholder"];
+const NOTHING_OLD_SHOWN = "Nothing old is shown.";
+
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
+  // The shell renders only once the workspace status read settles (outside
+  // Tauri it fails and the shell opens without a workspace). Keyboard and
+  // style probes that start before then act on an empty document.
+  // Named in the reader's language, so the wait does not name it.
+  await expect(page.getByRole("navigation").first()).toBeVisible();
+});
+
+test("the unavailable message these tests pin is still the catalogue's", () => {
+  expect(ROUTES_EN["route.unavailable"]).toContain(NOTHING_OLD_SHOWN);
 });
 
 test("the seven primary destinations render in their frozen order", async ({ page }) => {
@@ -118,22 +135,26 @@ test("the shell reflows at 1366x768 without a horizontal scrollbar", async ({ pa
 });
 
 test("the content region is labelled by the route heading", async ({ page }) => {
+  // The route heading sits in the header bar, above the content region, and
+  // names it through aria-labelledby.
+  const heading = page.getByRole("banner").getByRole("heading", { level: 1 });
+  await expect(heading).toHaveText("Executive Cockpit");
   const main = page.getByRole("main");
   await expect(main).toHaveAccessibleName("Executive Cockpit");
-  await expect(main.getByRole("heading", { level: 1 })).toHaveText("Executive Cockpit");
+  const headingId = await heading.getAttribute("id");
+  expect(headingId).not.toBeNull();
+  await expect(main).toHaveAttribute("aria-labelledby", headingId ?? "");
 });
 
-test("unimplemented routes say so in the product's own language", async ({ page }) => {
-  // Executive Cockpit and Portfolio both have owning slices now, so this
-  // navigates to one that does not. Pinning the string keeps a silent
-  // regression to an English fallback visible, and pinning the fallback itself
-  // keeps an unimplemented route from rendering an empty panel that looks like
-  // a working screen with no data in it.
-  await page.getByRole("button", { name: "Reviews & Reports", exact: true }).click();
-
-  await expect(
-    page.getByText("此畫面尚未實作，等待所屬垂直切片通過驗證後才會開放。"),
-  ).toBeVisible();
+test("no destination renders the shell's placeholder", async ({ page }) => {
+  // Every route has its owning slice now. The shell's placeholder is for a
+  // route without one, so its appearance anywhere in the assembled app is a
+  // wiring regression: an empty panel that looks like a working screen.
+  for (const destination of [...PRIMARY_DESTINATIONS, "System Health"]) {
+    await page.getByRole("button", { name: destination, exact: true }).click();
+    await expect(page.getByRole("main")).toHaveAccessibleName(destination);
+    await expect(page.getByText(ROUTE_PLACEHOLDER)).toHaveCount(0);
+  }
 });
 
 test("the Executive Cockpit route renders its own content, not the placeholder", async ({
@@ -143,10 +164,24 @@ test("the Executive Cockpit route renders its own content, not the placeholder",
   // error state. That is the point: it proves the route is genuinely wired
   // and reached, and that a failed query reports failure instead of showing
   // stale or invented data.
-  await expect(page.getByRole("alert")).toContainText("沒有顯示任何舊資料");
-  await expect(page.getByText("此畫面尚未實作，等待所屬垂直切片通過驗證後才會開放。")).toHaveCount(
-    0,
-  );
+  await expect(page.getByRole("alert")).toContainText(NOTHING_OLD_SHOWN);
+  await expect(page.getByText(ROUTE_PLACEHOLDER)).toHaveCount(0);
+});
+
+test.describe("in Traditional Chinese", () => {
+  // DG3's default language. The strings are written out here, not read from
+  // the catalogue, so a regression to an English fallback, or a lost
+  // translation, fails instead of agreeing with itself.
+  test.use({ locale: "zh-TW" });
+
+  test("a failed read says so in the reader's language", async ({ page }) => {
+    await expect(page.locator("html")).toHaveAttribute("lang", "zh-TW");
+    await expect(page.getByRole("navigation", { name: "主要導覽" })).toBeVisible();
+    await expect(page.getByRole("alert")).toContainText("畫面沒有顯示任何舊資料");
+    await expect(
+      page.getByText("此畫面尚未實作，等待所屬垂直切片通過驗證後才會開放。"),
+    ).toHaveCount(0);
+  });
 });
 
 /** The five semantic app-scale steps DG3 freezes, independent of Windows
