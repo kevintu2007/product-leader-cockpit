@@ -126,7 +126,7 @@ beta 版安裝程式沒有程式碼簽章，所以 Windows SmartScreen 會警告
 
     ![審閱單：接受 Confirm the Atlas rollout window](images/zh-TW/11-review-sheet.png)
 
-12. 往下捲。「核准內容摘要」是完整的 64 字元摘要；「預覽有效至」同時顯示時刻與剩餘分鐘。預覽有效 5 分鐘。
+12. 往下捲。「核准內容摘要」是完整的 64 字元內容雜湊摘要；「預覽有效至」同時顯示時刻與剩餘分鐘。預覽有效 5 分鐘。
 
     ![審閱單下半：摘要、準備紀錄與剩餘時間](images/zh-TW/12-review-sheet-digest.png)
 
@@ -182,7 +182,7 @@ beta 版安裝程式沒有程式碼簽章，所以 Windows SmartScreen 會警告
 
     ![完成表單：Judgment 理由留白](images/zh-TW/22-complete-form.png)
 
-24. 按 **產生完成預覽**。「證據與判斷」寫著證據已足夠，並列出 Evidence 的來源版本與摘要。你核准前如果這份 Evidence 被搬移、重新觀察或釘選，摘要就會不同，核准會被擋下。
+24. 按 **產生完成預覽**。「證據與判斷」寫著證據已足夠，並列出 Evidence 的來源版本與內容雜湊摘要。你核准前如果這份 Evidence 被搬移、重新觀察或釘選，摘要就會不同，核准會被擋下。
 
     ![完成審閱單：證據已足夠](images/zh-TW/23-complete-sheet.png)
 

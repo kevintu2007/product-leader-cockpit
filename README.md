@@ -167,28 +167,17 @@ repository on its own. Issues are welcome here; pull requests are not accepted d
 ## How it was built
 
 This is a tool built for the role of Head of Products, covering a company's whole product
-portfolio. I built it by directing AI
-coding agents under rules I set and enforced: Claude Code writes and tests one slice at a time, Codex reviews every slice
-independently, and nothing reaches the main branch until the full verification passes and I have
-accepted it from screenshots of the real app.
+portfolio. The design and the decisions are mine; AI coding agents wrote most of the code under a
+fixed loop: Claude Code implements one bounded change at a time, test first; Codex reviews it
+independently; the full verification suite passes; I accept it from the real app.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/media/pmc-how-it-was-built-dark.gif">
-  <img src="docs/media/pmc-how-it-was-built-light.gif" width="880" alt="Development workflow: the product owner sets goals, the orchestrator agent implements one slice test first with a hard stop after two failures, an independent review gate, full verification, and owner acceptance before main">
+  <img src="docs/media/pmc-how-it-was-built-light.gif" width="880" alt="Development workflow: the product owner sets goals, the orchestrator agent implements one bounded change test first with a hard stop after two failures, an independent review gate, full verification, and owner acceptance before main">
 </picture>
 
-It was not a weekend project. A few of the problems that took real design work, each with an
-independent review and a written decision:
-
-- A backup gate that holds a lock across a whole transaction deadlocked its own tests. The
-  two-failure rule stopped the first attempt; the redesign split it into an admission lock and a
-  state lock.
-- Restore had to replace a live SQLite file without `unsafe` code: a two-step rename, every phase
-  journaled, and a start-up that finishes or rolls back whatever a crash interrupted.
-- Approving a change re-derives the whole snapshot instead of comparing one hash. An audit found
-  seven of nine record families replaying the current state instead of the approved one.
-- The verification suite rebuilt the canonical schema from 46 migrations on every write. Computing
-  it once per process cut the Rust test time by two thirds.
+The design problems that took real work, the trade-offs behind them and what the reviews caught
+are written up, with dates, in the engineering story linked below.
 
 Measured on the private repository on 24 September 2026: 472 commits over 46 days, about 113,000
 lines of Rust with 80,000 more in tests, 36,000 lines of TypeScript, 1,540 Rust tests, 432 frontend
