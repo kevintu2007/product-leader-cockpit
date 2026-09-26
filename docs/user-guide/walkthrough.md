@@ -90,7 +90,7 @@ deciding is not.
 | Action Request   | Six, all open. Three are past their response date; two have no owner                                                                                                                                               |
 | Decision Request | Three, all open                                                                                                                                                                                                    |
 | Risk             | Four, all open                                                                                                                                                                                                     |
-| Issue            | Four, all open. The fourth is marked as the second occurrence of the first                                                                                                                                         |
+| Issue            | Four, all open. The fourth is titled "second occurrence" to show repeated work; no recurrence link is stored                                                                                                         |
 | Evidence         | `-1` verified; `-2` readable but no pinned fingerprint; `-3` verified before but can't be confirmed now; `-4` not verified; `-5` verified (Restricted); `-6` verified (linked to an Action Request, not a Product) |
 
 ### Monday: look, don't touch
@@ -353,7 +353,8 @@ Nothing is written today.
 
 42. Select **Issue**. There are five open Issues, each offering **Prepare to resolve**. **Key vendor
     concentration** is the one the Risk just created, with the Risk's title. **Nightly export fails on
-    large accounts (second occurrence)** is marked as a recurrence of the first.
+    large accounts (second occurrence)** carries that phrase in its title to show repeated work; this
+    release stores no recurrence link between Issues.
 
     ![Work Queue, Issues only: five open](images/en/40-issue-list.png)
 
@@ -374,8 +375,9 @@ Nothing is written today.
 
     ![Approved and carried out: demo-issue-2 is now Resolved](images/en/42-issue-resolved.png)
 
-46. Select **Close**. The Issue now offers **Prepare to close** (needs verified Evidence) and **Prepare
-    to reopen** (needs Evidence that failed verification, and your reason).
+46. Select **Close**. The Issue now offers **Prepare to close** (needs Evidence: verified, or partly
+    verified and carried by a written Judgment) and **Prepare to reopen** (needs Evidence showing that the earlier resolution
+    did not hold, plus your reason; that Evidence must itself pass the same Evidence-or-Judgment gate).
 
     ![A resolved Issue: its state allows Close and Reopen](images/en/43-issue-next-steps.png)
 
@@ -503,6 +505,9 @@ the Executive Cockpit shows where you are.
    it was verified and when the next one is due, and the Backup due strip goes away.
 
    ![A verified backup, and the next one due in a day](images/en/p05-backup-verified.png)
+
+   A backup holds the Ledger and PMC's non-secret settings. It does not include your Vault or
+   Evidence files; back up that folder separately.
 
 6. Further down Settings, under **Data sources → Product Vault**, select **Choose Vault folder…**. PMC
    explains that it backs up this workspace before anything changes; select **Choose Vault folder…**

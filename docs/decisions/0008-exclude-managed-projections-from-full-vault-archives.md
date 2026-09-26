@@ -35,7 +35,7 @@ Capacity planning covers 14 retained daily Operational Backups, eight weekly Ful
 
 ## Current state
 
-Not built. The application has no Full Vault Archive, no scheduled backups and no restore. The only backup primitive today is the Ledger's own verified snapshot (see [0004](0004-forward-only-product-ledger-migrations.md)).
+Implementation update, 2026-09-25 (0.2.0-beta): Operational Backups exist, encrypted and verified, with due-backup handling and restore (see [0010](0010-age-encrypted-operational-backup-archives.md)). A restore already marks managed projections out of sync, as this decision requires. The Full Vault Archive itself is still not built: Vault notes and attachments are not archived.
 
 ## Revisit when
 

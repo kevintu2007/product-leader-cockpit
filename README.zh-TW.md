@@ -31,13 +31,16 @@ Product Mission Control 是一個 Windows 桌面應用程式，給一個負責�
 任何事會替你決定，一切都在你自己的電腦上執行。
 
 - **排序，並說明理由。** Work Queue 的每一項都寫出為什麼排在這裡，以及目前狀態允許哪些下一步。
-- **精確的預覽。** 任何東西改變之前，app 先列出每一筆紀錄、版本與新 id，你核准的摘要涵蓋全部內容。
+- **精確的預覽。** 需要核准的變更會先準備成預覽：app 列出每一筆紀錄、版本與新 id，你核准的摘要
+  涵蓋全部內容。
 - **Evidence 或 Judgment。** 需要依據的變更，要有已驗證的 Evidence，或你寫下並負責的 Judgment；
-  從未驗證的 Evidence，任何判斷都無法替它背書。
+  從未驗證的 Evidence，任何判斷都無法替它背書。「已驗證」指檔案符合釘選的指紋；app 不判斷來源的
+  內容是否正確。
 - **檔案留在你手上。** Evidence 放在你選的 Vault 資料夾；app 只記錄每個檔案的位置與指紋，不複製
   檔案。
-- **重要之前先備份。** 你的工作區要等加密備份驗證通過後才接受變更；備份可以用公開的 `age` 工具
-  還原。
+- **寫入前先確認備份。** 你的工作區要等加密備份驗證通過後才接受變更。備份包含 Ledger 與非機密
+  設定，不包含 Vault 或 Evidence 檔案；不靠 PMC 也打得開：先用公開的 `age` 工具解密，再用 zstd 與
+  tar 解開。
 - **六種語言。** English、繁體中文、简体中文、日本語、한국어、Español。
 
 ## 開始使用
@@ -140,7 +143,8 @@ Product Mission Control 是一個 Windows 桌面應用程式，給一個負責�
 這是我替自己工作做的工具的公開版。開發在一個私有 repo 進行，那裡還放著規劃文件、設計審查、agent
 設定與每日開發日誌。這個 repo 由私有 repo 依允許清單匯出：只收錄 app 本身、它的測試、建置與驗證
 腳本，以及寫給專案外讀者的文件；另有一道掃描檢查私人路徑、姓名與憑證，一旦發現就中止匯出。commit
-歷史不會帶過來，所以每一個公開 commit 都是一次發布快照。
+歷史不會帶過來：第一個公開 commit 是匯出的發布快照，之後的 commit 是公開文件與相容性修正，正式
+發布的版本以 release tag 標示。
 
 對你來說，這代表：這裡的程式碼就是實際出貨的程式碼，而且 `npm run verify` 在這個 repo 單獨就能
 通過。歡迎在這裡開 issue；beta 期間不接受 pull request。
@@ -167,7 +171,7 @@ Product Mission Control 是一個 Windows 桌面應用程式，給一個負責�
 - 驗證套件每次寫入都從 46 個 migration 重建正典 schema。改成每個程序只算一次，Rust 測試時間少了
   三分之二。
 
-46 天、472 個 commit、約 113,000 行 Rust 加上 80,000 行 Rust 測試、36,000 行 TypeScript、1,540 個
+2026 年 9 月 24 日在私人 repo 上量測：46 天、472 個 commit、約 113,000 行 Rust 加上 80,000 行 Rust 測試、36,000 行 TypeScript、1,540 個
 Rust 測試、432 個前端測試、48 個只能前進的 schema 版本。完整的故事，包括審查關卡抓到了什麼，寫在[這個專案是怎麼做出來的](docs/engineering/story.zh-TW.md)與
 [Working with AI agents](docs/engineering/working-with-ai-agents.md)（英文）。
 

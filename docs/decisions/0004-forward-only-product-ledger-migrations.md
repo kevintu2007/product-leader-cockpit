@@ -26,11 +26,11 @@ Ledger migrations are append-only and forward-only. There is no automatic down m
 
 ## Current state
 
-Only part of this decision is built.
+Implementation update, 2026-09-25 (0.2.0-beta):
 
-- Built: the migrations in `crates/pmc-ledger/src/sqlite/migrations.rs` are an ordered, append-only list, each with a checksum recorded in the Ledger. Opening a Ledger fails closed: `SqliteProductLedger::open` refuses a database that belongs to another application, has a newer schema, or has any schema other than the current one (46), and it validates the stored schema and migration registry against the code.
-- Built: the Ledger can write a snapshot of itself and verify it (`create_verified_snapshot`, `verify_snapshot`).
-- Not built: upgrading an existing Ledger in place. Migrations run only when a new, empty Ledger is created; upgrade paths and rollback after an injected failure are exercised in tests only. The pre-migration backup, the preflight preview for non-atomic migrations, and restore are not built.
+- Built: the migrations in `crates/pmc-ledger/src/sqlite/migrations.rs` are an ordered, append-only list, each with a checksum recorded in the Ledger; the current schema is 48. Opening a Ledger fails closed: `SqliteProductLedger::open` refuses a database that belongs to another application, has a newer schema, or has any schema other than the current one, and it validates the stored schema and migration registry against the code.
+- Built: upgrading an older Ledger in place. The Ledger is inspected read-only, backed up as a closed file and the backup verified, then upgraded in one transaction with foreign keys off before `BEGIN` and a foreign-key check before commit. Restore from a verified backup is built.
+- Not built: the preflight preview and approval flow for a migration that cannot run atomically. Every migration shipped so far runs atomically.
 
 ## Revisit when
 

@@ -2,10 +2,11 @@
 
 This file records notable changes. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Version numbers follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.2.0-beta - Unreleased
+## 0.2.0-beta - 2026-09-25
 
-The first beta, and the first version with a Windows installer. It can hold real records: your
-workspace is backed up, encrypted, and can be restored.
+The first beta, and the first version with a Windows installer. It can hold real records, with
+verified, encrypted backups and restore. The working Ledger and Vault files are not encrypted by the
+application.
 
 ### Added
 
@@ -39,12 +40,14 @@ workspace is backed up, encrypted, and can be restored.
 
 ### Changed
 
-- The Work Queue shows Risk titles and marks a recurring Issue as a further occurrence.
+- The Work Queue shows Risk titles.
 - File and folder pickers are opened by the host; no file path crosses the IPC boundary.
 
 ### Not yet available
 
 - Review periods, Fact Packs and approved reports.
+- Recurrence links between Issues. One sample Issue is titled "second occurrence" to show repeated
+  work; no link is stored.
 - Moving an Evidence file to a new location from the UI.
 - Code signing, automatic updates and a full Vault archive.
 - AI assistance.

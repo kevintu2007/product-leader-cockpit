@@ -71,7 +71,7 @@ _Avoid_: user account, assignee only
 ## Knowledge and reporting
 
 **Evidence**:
-A traceable source that supports a KPI observation, a status, a conclusion, an Action or a Decision. Each Evidence reference carries a verification state.
+A traceable source that supports a KPI observation, a status, a conclusion, an Action or a Decision. Each Evidence reference carries a verification state. Verified means the file matches its pinned fingerprint; it is not a judgment that the source's claims are true.
 _Avoid_: unattributed assertion, generated claim
 
 **Product Vault**:
@@ -172,8 +172,8 @@ _Avoid_: prompt dump, background transmission, reusable unrestricted export
 
 ## Backup and recovery
 
-**Operational Backup** (partly built):
-A verified encrypted backup of the Product Ledger, schema and version information, non-secret settings and a manifest; rebuildable projections are excluded. Today the Ledger can write a snapshot of itself and verify it by hash, schema version and revision. Encryption, scheduling, restore and any user interface for backups are not built.
+**Operational Backup**:
+A verified, encrypted archive of the Product Ledger, selected non-secret settings, an authority inventory and a manifest; rebuildable projections and Vault files are excluded. Version 0.2.0-beta provides backup setup, due-backup handling and restore.
 _Avoid_: file synchronization, Full Vault Archive
 
 **Full Vault Archive** (not built):

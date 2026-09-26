@@ -34,14 +34,16 @@ decided for you, and everything runs on your own machine.
 
 - **Ranked, with reasons.** Every item in the Work Queue says why it is where it is and which next
   steps its state allows.
-- **Exact previews.** Before anything changes, the app names every record, version and new id, and
-  the digest you approve covers all of it.
+- **Exact previews.** A change that needs approval is prepared first: the app names every record,
+  version and new id, and the digest you approve covers all of it.
 - **Evidence or Judgment.** Changes that need support rest on verified Evidence, or on a written
-  Judgment you own. Evidence that was never verified cannot be vouched for.
+  Judgment you own. Evidence that was never verified cannot be vouched for. Verified means the file
+  matches its pinned fingerprint; the app does not judge whether a source's claims are true.
 - **Your files stay yours.** Evidence lives in a Vault folder you choose; the app records where each
   file is and its fingerprint, and never copies it.
 - **Backed up before it matters.** Your workspace accepts changes only after an encrypted backup has
-  verified, and a backup is restorable with the public `age` tool.
+  verified. A backup holds the Ledger and non-secret settings, not your Vault or Evidence files, and
+  it opens without PMC: decrypt with the public `age` tool, then unpack with zstd and tar.
 - **Six languages.** English, 繁體中文, 简体中文, 日本語, 한국어 and Español.
 
 ## Get started
@@ -156,7 +158,8 @@ repository that also holds planning documents, design reviews, agent configurati
 development journal. This repository is exported from it by an allowlist: only the application, its
 tests, the build and verification scripts, and documents written for readers outside the project
 are included, and a scan for private paths, names and credentials blocks the export if one slips through. The commit history is
-not carried over, so each public commit is a release snapshot.
+not carried over: the first public commit is an exported release snapshot, later commits carry
+public documentation and compatibility fixes, and release tags mark the published versions.
 
 What that means for you: the code here is the code that ships, and `npm run verify` passes on this
 repository on its own. Issues are welcome here; pull requests are not accepted during the beta.
@@ -187,8 +190,9 @@ independent review and a written decision:
 - The verification suite rebuilt the canonical schema from 46 migrations on every write. Computing
   it once per process cut the Rust test time by two thirds.
 
-472 commits over 46 days, about 113,000 lines of Rust with 80,000 more in tests, 36,000 lines of
-TypeScript, 1,540 Rust tests, 432 frontend tests and 48 forward-only schema versions.
+Measured on the private repository on 24 September 2026: 472 commits over 46 days, about 113,000
+lines of Rust with 80,000 more in tests, 36,000 lines of TypeScript, 1,540 Rust tests, 432 frontend
+tests and 48 forward-only schema versions.
 Read the full story, including what the review gates caught, in
 [How this was built](docs/engineering/story.md) and
 [Working with AI agents](docs/engineering/working-with-ai-agents.md).

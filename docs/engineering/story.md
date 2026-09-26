@@ -40,7 +40,8 @@ skill I had published earlier for exactly this step, with every item marked conf
 open. Everything built afterwards followed it.
 
 Design came next, as a series of gates: a concept, then a design brief with an interactive
-prototype, then a UI contract, frozen on 17 August 2026 before the first line of application code.
+prototype, then a UI contract, frozen on 15 August 2026, two days before the first line of
+application code.
 
 <p align="center">
   <img src="images/design-portfolio-command.png" width="820" alt="Design prototype of the Portfolio command screen: a Portfolio Lens comparing Products, an owner work list ranked by attention, and every measure carrying its definition">

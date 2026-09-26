@@ -73,7 +73,7 @@ beta 版安裝程式沒有程式碼簽章，所以 Windows SmartScreen 會警告
 | Action Request   | 6 筆，全部待處理。3 筆的回覆期限已過；2 筆沒有負責人                                                                                                               |
 | Decision Request | 3 筆，全部待處理                                                                                                                                                   |
 | Risk             | 4 筆，全部待處理                                                                                                                                                   |
-| Issue            | 4 筆，全部待處理。第 4 筆標成第 1 筆的再次發生                                                                                                                     |
+| Issue            | 4 筆，全部待處理。第 4 筆的標題寫著「second occurrence」，用來呈現重複發生；沒有儲存復發關聯                                                                       |
 | Evidence         | `-1` 已驗證、`-2` 讀得到但沒有釘選指紋、`-3` 曾經驗證但目前無法再確認、`-4` 未驗證、`-5` 已驗證（Restricted）、`-6` 已驗證（連在 Action Request 上，不是 Product） |
 
 ### 星期一：先看，不動手
@@ -270,7 +270,7 @@ beta 版安裝程式沒有程式碼簽章，所以 Windows SmartScreen 會警告
 
 ### 星期四傍晚：Issue
 
-42. 按 **Issue**。5 筆都是待處理，每筆都有 **準備解決**。**Key vendor concentration** 是剛才由 Risk 建立的，沿用 Risk 的標題。**Nightly export fails on large accounts (second occurrence)** 標成第一筆的再次發生。
+42. 按 **Issue**。5 筆都是待處理，每筆都有 **準備解決**。**Key vendor concentration** 是剛才由 Risk 建立的，沿用 Risk 的標題。**Nightly export fails on large accounts (second occurrence)** 標題裡的「second occurrence」用來呈現重複發生的情境；這個版本不會儲存 Issue 之間的復發關聯。
 
     ![Work Queue 只顯示 Issue：5 筆待處理](images/zh-TW/40-issue-list.png)
 
@@ -288,7 +288,7 @@ beta 版安裝程式沒有程式碼簽章，所以 Windows SmartScreen 會警告
 
     ![已核准並執行：demo-issue-2 已解決](images/zh-TW/42-issue-resolved.png)
 
-46. 按 **關閉**。這筆 Issue 現在有 **準備關閉**（需要已驗證的證據）與 **準備重新開啟**（需要驗證失敗的證據，加上你的理由）。
+46. 按 **關閉**。這筆 Issue 現在有 **準備關閉**（需要 Evidence：已驗證，或只驗證了一部分而由你寫下的 Judgment 承接）與 **準備重新開啟**（需要能證明先前的解決結果沒有成立的 Evidence，加上你的理由；這份 Evidence 本身仍要通過同一道 Evidence-or-Judgment 規則）。
 
     ![已解決的 Issue：狀態允許關閉、重新開啟](images/zh-TW/43-issue-next-steps.png)
 
@@ -382,6 +382,8 @@ beta 版安裝程式沒有程式碼簽章，所以 Windows SmartScreen 會警告
 5. 按 **立即備份**。備份寫入並讀回驗證後，「最近一次備份」會顯示驗證時間與下一次到期時間，備份已到期提示列也會消失。
 
    ![驗證通過的備份，下一次在一天後到期](images/zh-TW/p05-backup-verified.png)
+
+   備份包含 Ledger 與 PMC 的非機密設定，不包含 Vault 或 Evidence 檔案；那個資料夾請另外備份。
 
 6. 在 Settings 往下捲，到 **資料來源 → Product Vault** 按 **選擇 Vault 資料夾…**。PMC 會說明變更前會先備份這個工作區；再按一次 **選擇 Vault 資料夾…**，Windows 會開啟選擇資料夾視窗：選存放（或將要存放）Evidence 檔案的資料夾。接著 PMC 會列出確切的變更：目前與新的資料夾、受影響的 Evidence，以及剛做好的備份。輸入畫面上的確認短語，按 **使用這個資料夾**。
 
