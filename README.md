@@ -176,8 +176,16 @@ independently; the full verification suite passes; I accept it from the real app
   <img src="docs/media/pmc-how-it-was-built-light.gif" width="880" alt="Development workflow: the product owner sets goals, the orchestrator agent implements one bounded change test first with a hard stop after two failures, an independent review gate, full verification, and owner acceptance before main">
 </picture>
 
-The design problems that took real work, the trade-offs behind them and what the reviews caught
-are written up, with dates, in the engineering story linked below.
+Two of the problems that took real design work:
+
+- Approving a change re-derives the whole snapshot and compares it as one thing, instead of
+  checking one hash. An audit found seven of nine record families replaying the current state
+  instead of the approved one; the fix became the rule every later mechanism follows.
+- Restore replaces a live SQLite file without `unsafe` code: a two-step rename with every phase
+  journaled, and a start-up that finishes or rolls back whatever a crash interrupted.
+
+The rest, with the trade-offs behind them and what the reviews caught, is written up with dates in
+the engineering story linked below.
 
 Measured on the private repository on 24 September 2026: 472 commits over 46 days, about 113,000
 lines of Rust with 80,000 more in tests, 36,000 lines of TypeScript, 1,540 Rust tests, 432 frontend
